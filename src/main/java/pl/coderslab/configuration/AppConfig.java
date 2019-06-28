@@ -7,12 +7,17 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.LocaleContextResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+
 import javax.persistence.EntityManagerFactory;
+import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
@@ -24,7 +29,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public LocalEntityManagerFactoryBean entityManagerFactory() {
         LocalEntityManagerFactoryBean emfb = new LocalEntityManagerFactoryBean();
-        emfb.setPersistenceUnitName("localeAttractionsPersistenceUnit"); //Nazwa jednostki utrwalania = tej z persistence.xml
+        emfb.setPersistenceUnitName("localeAttractionsPersistenceUnit");
         return emfb;
     }
 
@@ -40,6 +45,18 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
         return viewResolver;
+    }
+
+    @Bean
+    public LocaleContextResolver getLocaleContextResolver() {
+        SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+        localeResolver.setDefaultLocale(new Locale("pl", "PL"));
+        return localeResolver;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/css/**").addResourceLocations("/css/");
     }
 
 }

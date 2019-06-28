@@ -1,0 +1,27 @@
+div.error{
+    color: red;
+    background-color: #e4bdcb;
+    border-color: red;
+    border-style: solid;
+    border-width: 0px 0px 0px 5px;
+}
+span.error{
+    font-size: 0.8em;
+    padding-left: 5px;
+}
+.loginBlock {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+
+    width: 350px;
+
+    border-width: 2px;
+    border-color: #78a1ff;
+    border-style: solid;
+    border-radius: 5%;
+    position: relative;
+}
+
+
+
