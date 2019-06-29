@@ -8,33 +8,7 @@
 
 </head>
 <body>
-
-        <div class="form loginBlock">
-            <h3>Zaloguj się jako firma:</h3>
-
-            <form:form method="post" modelAttribute="viewMode">
-                <div class="formElement">
-                    E-mail:
-                    <form:input path="email"/>
-                    <div class="error">
-                        <form:errors path="email" cssClass="error" />
-                    </div>
-                </div>
-                <div class="formElement">
-                    Hasło:
-                    <form:password path="password"/>
-                    <div class="error">
-                        <form:errors path="password" cssClass="error" />
-                        <c:if test="${not empty passwordError}">
-                            <span class="error">${passwordError}</span>
-                        </c:if>
-                    </div>
-                </div>
-                <input type="hidden" name="action" value="business">
-                <input type="submit" value="Zaloguj się">
-            </form:form>
-        </div>
-
+<div class="main">
     <div class="loginBlock">
         <h4>Zaloguj się jako użytkownik:</h4>
 
@@ -48,6 +22,33 @@
             <button>Rejestracja</button>
         </a>
     </div>
+
+    <div class="form loginBlock">
+        <h3>Zaloguj się jako firma:</h3>
+
+        <form:form method="post" modelAttribute="businessLogin">
+            <div class="formElement">
+                E-mail:
+                <form:input path="email"/>
+                <div class="error">
+                    <form:errors path="email" cssClass="error" />
+                </div>
+            </div>
+            <div class="formElement">
+                Hasło:
+                <form:password path="password"/>
+                <div class="error">
+                    <form:errors path="password" cssClass="error" />
+                    <c:if test="${not empty passwordError}">
+                        <span class="error">${passwordError}</span>
+                    </c:if>
+                </div>
+            </div>
+            <input type="hidden" name="action" value="business">
+            <input type="submit" value="Zaloguj się">
+        </form:form>
+    </div>
+
 </div>
 
 </body>

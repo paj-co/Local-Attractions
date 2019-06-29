@@ -18,7 +18,9 @@ public class User {
 
     @NotBlank
     @Email
+    //TODO create working annotation UniqueEmail
 //    @UniqueEmail
+    @Column(unique = true)
     private String email;
 
     @NotBlank

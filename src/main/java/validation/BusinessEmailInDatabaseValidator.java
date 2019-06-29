@@ -1,13 +1,12 @@
 package validation;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.coderslab.service.AuthenticationService;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class EmailInDatabaseValidator implements ConstraintValidator<EmailInDatabase, String> {
+public class BusinessEmailInDatabaseValidator implements ConstraintValidator<BusinessEmailInDatabase, String> {
 
     @Autowired
     private AuthenticationService authenticationService;
@@ -18,11 +17,11 @@ public class EmailInDatabaseValidator implements ConstraintValidator<EmailInData
         if (email == null) {
             return true;
         }
-        return authenticationService.checkIfUserEmailIsInDatabase(email);
+        return authenticationService.checkIfBusinessEmailIsInDatabase(email);
     }
 
     @Override
-    public void initialize(EmailInDatabase constraintAnnotation) {
+    public void initialize(BusinessEmailInDatabase constraintAnnotation) {
 
     }
 }

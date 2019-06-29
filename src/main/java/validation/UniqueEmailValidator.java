@@ -13,6 +13,10 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, St
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
+//        constraintValidatorContext.disableDefaultConstraintViolation();
+//        if (authenticationService == null) {
+//            this.authenticationService = new AuthenticationService();
+//        }
         if (email != null) {
             System.out.println("isValid 1 " + email + " ------------------------");
             return !authenticationService.checkIfUserEmailIsInDatabase(email);

@@ -6,7 +6,15 @@
 </head>
 <body>
 
-<h1>Witaj, ${loggedBusiness.name}!</h1>
+    <a href="<c:url value="/businessapp/logout/" />">
+        <button>Wylogowanie</button>
+    </a>
+    <h1>Witaj, ${loggedBusiness.name}!</h1>
+
+    <a href="<c:url value="/businessapp/service/add" />">
+        <button>Dodaj usługę</button>
+    </a>
+
 
 </body>
 </html>

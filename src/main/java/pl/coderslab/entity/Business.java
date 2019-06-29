@@ -20,6 +20,7 @@ public class Business {
     private Long id;
 
     @NotBlank
+    //TODO @UniqueEmail
 //    @UniqueEmail
     @Email
     private String email;

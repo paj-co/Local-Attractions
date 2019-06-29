@@ -7,10 +7,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = EmailInDatabaseValidator.class)
+@Constraint(validatedBy = UserEmailInDatabaseValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface EmailInDatabase {
+public @interface UserEmailInDatabase {
 
     String message() default "{emailInDatabase.error.message}";
 

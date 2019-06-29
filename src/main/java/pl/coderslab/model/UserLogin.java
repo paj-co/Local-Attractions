@@ -1,21 +1,18 @@
 package pl.coderslab.model;
 
-import validation.EmailInDatabase;
+import validation.UserEmailInDatabase;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-public class ViewMode {
+public class UserLogin {
 
     @Email
-    @EmailInDatabase
+    @UserEmailInDatabase
     private String email;
 
     @NotBlank
     private String password;
-
-    private String action;
-
 
     public String getEmail() {
         return email;
@@ -33,11 +30,4 @@ public class ViewMode {
         this.password = password;
     }
 
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
-    }
 }

@@ -6,6 +6,9 @@
 </head>
 <body>
 
+    <a href="<c:url value="/userapp/logout/" />">
+        <button>Wylogowanie</button>
+    </a>
     <h1>Witaj, ${loggedUser.firstName}!</h1>
 
 </body>

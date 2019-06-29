@@ -13,7 +13,7 @@
         <div class="form loginBlock">
             <h3>Zaloguj się jako użytkownik:</h3>
 
-            <form:form method="post" modelAttribute="viewMode">
+            <form:form method="post" modelAttribute="userLogin">
                 <div class="formElement">
                     E-mail:
                     <form:input path="email"/>

@@ -38,8 +38,8 @@ public class AuthenticationService {
     }
 
     public boolean checkIfBusinessEmailIsInDatabase(String email) {
-        User user = userRepository.findUserByEmail(email);
-        if (user != null) {
+        Business business = businessRepository.findBusinessByEmail(email);
+        if (business != null) {
             return true;
         }
         return false;
