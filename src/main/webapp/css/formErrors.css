@@ -11,6 +11,7 @@ span.error{
 }
 .loginBlock {
     display: inline-block;
+    vertical-align: top;
     margin: 10px;
     padding: 10px;
 
@@ -20,9 +21,101 @@ span.error{
     border-color: #78a1ff;
     border-style: solid;
     border-radius: 5%;
-    position: relative;
 }
-
-
+/*add new service*/
+#addService .inline{
+    display: inline-block;
+}
+#addService th{
+    font-weight: normal;
+}
+#addService .short input{
+    width: 60px;
+}
+#addService table p{
+    text-align: left;
+}
+/*service details*/
+#serviceDetails{
+    width: 90%;
+    margin: 0 auto;
+    font-size: 0.9em;
+}
+#serviceDetails .topic{
+    color: darkblue;
+}
+#serviceDetails .mainDetails {
+    margin-right: 20px;
+}
+#serviceDetails .mainDetails, .secondaryDetails{
+    display: inline-block;
+    vertical-align: top;
+    width: 45%;
+    min-width: 400px;
+    max-width: 600px;
+    background-color: #feffd7;
+}
+#serviceDetails table{
+    font-size: 0.9em;
+}
+#serviceDetails table p{
+    text-align: left;
+}
+#serviceDetails .lists{
+    margin-bottom: 15px;
+}
+#serviceDetails .lists .topic{
+    display: block;
+}
+#serviceDetails #category, #tag {
+    width: 20%;
+    display: inline-block;
+    vertical-align: top;
+}
+#serviceDetails #category .content, #tag .content{
+    display: block;
+    border-radius: 5% 20% 5%;
+    background-color: #cbcbcb;
+    padding: 2px;
+    width: max-content;
+}
+#serviceDetails #newsFeed, #offers{
+    font-size: 0.85em;
+}
+#serviceDetails #newsFeed .contentTopic, #offers .contentTopic{
+    color: #003e00;
+    font-weight: bold;
+}
+#serviceDetails .itemBody{
+    background-color: #fdfdfd;
+    margin-bottom: 10px;
+}
+#serviceDetails #newsFeed .content, #offers .content{
+    display: block;
+    padding: 2px;
+    margin-left: 10px;
+}
+#serviceDetails #picture{
+    margin: 0 auto;
+    max-width: 60%;
+}
+#serviceDetails #picture img{
+    border: 5px solid #ddd;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+#serviceDetails hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 0.5em 0;
+    padding: 0;
+}
+#serviceDetails h3{
+    text-align: center;
+}
 
 

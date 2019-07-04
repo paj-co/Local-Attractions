@@ -1,0 +1,1 @@
+INSERT INTO local_attractions.businesses (id, email, name, nip, password, regon) VALUES (1, 'pomiechowek@kajaki.pl', 'ANMAR Kajaki Pomiechówek', '6065022504', '$2a$10$zNIw6uU1jQzjH6KJ9EtZaeqRQldsuh/XzH56Eyzw.d9am7wJpfEfO', '280377064');

@@ -14,10 +14,13 @@ public class BusinessAuthenticationFilter implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
+
         HttpSession httpSession = ((HttpServletRequest) req).getSession();
+
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html");
+
         if (httpSession.getAttribute("loggedBusiness") == null){
             ((HttpServletResponse) resp).sendRedirect(((HttpServletRequest) req).getContextPath() + "/authentication/login/business/");
         } else {

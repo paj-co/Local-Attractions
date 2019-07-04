@@ -4,19 +4,19 @@
 <html>
 <head>
     <title>Dodaj usługę | Lokalne Atrakcje</title>
+    <link href='<c:url value="/css/formErrors.css"/>' rel="stylesheet">
     <style>
-        .inline{
-            display: inline-block;
-        }
+
     </style>
 </head>
 <body>
 
-<div class="loginBlock">
+<div id="addService">
 
-    <h3>Zarejestruj się:</h3>
+    <h2>Utwórz nową usługę:</h2>
 
     <form:form method="post" modelAttribute="service">
+        <form:hidden path="business.id" value="${loggedBusiness.id}" />
         <div>
             Nazwa usługi:
             <form:input path="name"/>
@@ -57,31 +57,31 @@
         <br>
 
         <div class="inline">
-            Miejscowość:
-            <form:input path="locality"/>
-            <div class="error">
-                <form:errors path="locality" cssClass="error" />
-            </div>
-        </div>
-        <div class="inline">
             Wojewódźtwo:
-            <form:input path="province"/>
+            <form:select path="province" items="${provinces}" itemLabel="name" itemValue="id"/>
             <div class="error">
                 <form:errors path="province" cssClass="error" />
             </div>
         </div>
         <div class="inline">
             Powiat:
-            <form:input path="district"/>
+            <form:select path="district" items="${districts}" itemLabel="name" itemValue="id"/>
             <div class="error">
                 <form:errors path="district" cssClass="error" />
             </div>
         </div>
         <div class="inline">
             Gmina:
-            <form:input path="commune"/>
+            <form:select path="commune" items="${communes}" itemLabel="name" itemValue="id"/>
             <div class="error">
                 <form:errors path="commune" cssClass="error" />
+            </div>
+        </div>
+        <div class="inline">
+            Miejscowość:
+            <form:select path="locality" items="${localities}" itemLabel="name" itemValue="id"/>
+            <div class="error">
+                <form:errors path="locality" cssClass="error" />
             </div>
         </div>
 
@@ -105,14 +105,14 @@
         </div>
         <div>
             Nr telefonu:
-            <form:input path="phone"/> *opcjonalnie
+            <form:input path="phone"/>
             <div class="error">
                 <form:errors path="phone" cssClass="error" />
             </div>
         </div>
         <div>
             Informacje (dokładny opis usługi):
-            <form:textarea path="informations"/> *opcjonalnie
+            <form:textarea path="informations"/>
             <div class="error">
                 <form:errors path="informations" cssClass="error" />
             </div>
@@ -120,25 +120,164 @@
         <div>
             Kategorie:
             <form:select path="categories" items="${categories}" itemLabel="name" itemValue="id" multiple="true"/>
-            <%--TODO categories errors --%>
+                <%--TODO categories errors --%>
             <div class="error">
                 <form:errors path="categories" cssClass="error" />
             </div>
         </div>
+        <div>
+            Główne zdjęcie:
+                <input type="file" name="mainPicture">
+                <div class="error">
+
+                </div>
+        </div>
+
+        <table>
+            <tr>
+                <th colspan="3">
+                    <p class="topic">Godziny otwarcia:</p>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <span>Poniedziałek:</span>
+                </th>
+                <td>
+                    <span class="short"><form:input path="openHourMonday"/> - </span>
+                </td>
+                <td>
+                    <span class="short"><form:input path="closeHourMonday"/></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="error">
+                        <form:errors path="openHourMonday" cssClass="error" />
+                        <form:errors path="closeHourMonday" cssClass="error" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>Wtorek:</span>
+                </th>
+                <td>
+                    <span class="short"><form:input path="openHourTuesday"/> - </span>
+                </td>
+                <td>
+                    <span class="short"><form:input path="closeHourTuesday"/></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="error">
+                        <form:errors path="openHourTuesday" cssClass="error" />
+                        <form:errors path="closeHourTuesday" cssClass="error" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>Środa:</span>
+                </th>
+                <td>
+                    <span class="short"><form:input path="openHourWednesday"/> - </span>
+                </td>
+                <td>
+                    <span class="short"><form:input path="closeHourWednesday"/></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="error">
+                        <form:errors path="openHourWednesday" cssClass="error" />
+                        <form:errors path="closeHourWednesday" cssClass="error" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>Czwartek:</span>
+                </th>
+                <td>
+                    <span class="short"><form:input path="openHourThursday"/> - </span>
+                </td>
+                <td>
+                    <span class="short"><form:input path="closeHourThursday"/></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="error">
+                        <form:errors path="openHourThursday" cssClass="error" />
+                        <form:errors path="closeHourThursday" cssClass="error" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>Piątek:</span>
+                </th>
+                <td>
+                    <span class="short"><form:input path="openHourFriday"/> - </span>
+                </td>
+                <td>
+                    <span class="short"><form:input path="closeHourFriday"/></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="error">
+                        <form:errors path="openHourFriday" cssClass="error" />
+                        <form:errors path="closeHourFriday" cssClass="error" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>Sobota:</span>
+                </th>
+                <td>
+                    <span class="short"><form:input path="openHourSaturday"/> - </span>
+                </td>
+                <td>
+                    <span class="short"><form:input path="closeHourSaturday"/></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="error">
+                        <form:errors path="openHourSaturday" cssClass="error" />
+                        <form:errors path="closeHourSaturday" cssClass="error" />
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <span>Niedziela:</span>
+                </th>
+                <td>
+                    <span class="short"><form:input path="openHourSunday"/> - </span>
+                </td>
+                <td>
+                    <span class="short"><form:input path="closeHourSunday"/></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div class="error">
+                        <form:errors path="openHourTuesday" cssClass="error" />
+                        <form:errors path="closeHourTuesday" cssClass="error" />
+                    </div>
+                </td>
+            </tr>
 
 
-        <%--TODO        --%>
-<%--        <div>--%>
-<%--            Godzina otwarcia:--%>
-<%--            <form:input path="email"/>--%>
-<%--            <div class="error">--%>
-<%--                <form:errors path="email" cssClass="error" />--%>
-<%--                <c:if test="${not empty emailError}">--%>
-<%--                    <span class="error">${emailError}</span>--%>
-<%--                </c:if>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-        <input type="submit" value="Zaloguj sie">
+        </table>
+
+
+        <input type="submit" value="Przejdź do kroku 2 =>">
     </form:form>
 
 </div>

@@ -4,6 +4,7 @@ import validation.UniqueEmail;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.time.LocalTime;
 import java.util.List;
@@ -21,7 +22,7 @@ public class Service {
     @NotBlank
     private String description;
 
-    //TODO is picture necessary
+//    //TODO is picture necessary
     private File mainPicture;
 
     //TODO make annotation -> with validation
@@ -40,6 +41,7 @@ public class Service {
 
     @NotBlank
     private String street;
+    @NotNull
     @Min(value = 1)
     private Integer houseNumber;
     private Integer apartmentNumber;
@@ -48,7 +50,7 @@ public class Service {
     private String zipCode;
 
     @NotBlank
-    @UniqueEmail
+//    @UniqueEmail
     @Email
     private String email;
 
@@ -60,11 +62,35 @@ public class Service {
     private String informations;
 
     @NotNull
-    private LocalTime openHour;
+    private LocalTime openHourMonday;
     @NotNull
-    private LocalTime closeHour;
+    private LocalTime closeHourMonday;
+    @NotNull
+    private LocalTime openHourTuesday;
+    @NotNull
+    private LocalTime closeHourTuesday;
+    @NotNull
+    private LocalTime openHourWednesday;
+    @NotNull
+    private LocalTime closeHourWednesday;
+    @NotNull
+    private LocalTime openHourThursday;
+    @NotNull
+    private LocalTime closeHourThursday;
+    @NotNull
+    private LocalTime openHourFriday;
+    @NotNull
+    private LocalTime closeHourFriday;
+    @NotNull
+    private LocalTime openHourSaturday;
+    @NotNull
+    private LocalTime closeHourSaturday;
+    @NotNull
+    private LocalTime openHourSunday;
+    @NotNull
+    private LocalTime closeHourSunday;
 
-    @ManyToMany(mappedBy = "services", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "services")
     private List<Category> categories;
 
     @OneToMany(mappedBy = "service")
@@ -82,6 +108,11 @@ public class Service {
 
     @ManyToMany(mappedBy = "favouriteServices")
     private List<User> users;
+
+    public Service() {
+    }
+
+//Getters And Setters ----------------------------------------------------------------------
 
     public Long getId() {
         return id;
@@ -203,20 +234,116 @@ public class Service {
         this.informations = informations;
     }
 
-    public LocalTime getOpenHour() {
-        return openHour;
+    public LocalTime getOpenHourMonday() {
+        return openHourMonday;
     }
 
-    public void setOpenHour(LocalTime openHour) {
-        this.openHour = openHour;
+    public void setOpenHourMonday(LocalTime openHourMonday) {
+        this.openHourMonday = openHourMonday;
     }
 
-    public LocalTime getCloseHour() {
-        return closeHour;
+    public LocalTime getCloseHourMonday() {
+        return closeHourMonday;
     }
 
-    public void setCloseHour(LocalTime closeHour) {
-        this.closeHour = closeHour;
+    public void setCloseHourMonday(LocalTime closeHourMonday) {
+        this.closeHourMonday = closeHourMonday;
+    }
+
+    public LocalTime getOpenHourTuesday() {
+        return openHourTuesday;
+    }
+
+    public void setOpenHourTuesday(LocalTime openHourTuesday) {
+        this.openHourTuesday = openHourTuesday;
+    }
+
+    public LocalTime getCloseHourTuesday() {
+        return closeHourTuesday;
+    }
+
+    public void setCloseHourTuesday(LocalTime closeHourTuesday) {
+        this.closeHourTuesday = closeHourTuesday;
+    }
+
+    public LocalTime getOpenHourWednesday() {
+        return openHourWednesday;
+    }
+
+    public void setOpenHourWednesday(LocalTime openHourWednesday) {
+        this.openHourWednesday = openHourWednesday;
+    }
+
+    public LocalTime getCloseHourWednesday() {
+        return closeHourWednesday;
+    }
+
+    public void setCloseHourWednesday(LocalTime closeHourWednesday) {
+        this.closeHourWednesday = closeHourWednesday;
+    }
+
+    public LocalTime getOpenHourThursday() {
+        return openHourThursday;
+    }
+
+    public void setOpenHourThursday(LocalTime openHourThursday) {
+        this.openHourThursday = openHourThursday;
+    }
+
+    public LocalTime getCloseHourThursday() {
+        return closeHourThursday;
+    }
+
+    public void setCloseHourThursday(LocalTime closeHourThursday) {
+        this.closeHourThursday = closeHourThursday;
+    }
+
+    public LocalTime getOpenHourFriday() {
+        return openHourFriday;
+    }
+
+    public void setOpenHourFriday(LocalTime openHourFriday) {
+        this.openHourFriday = openHourFriday;
+    }
+
+    public LocalTime getCloseHourFriday() {
+        return closeHourFriday;
+    }
+
+    public void setCloseHourFriday(LocalTime closeHourFriday) {
+        this.closeHourFriday = closeHourFriday;
+    }
+
+    public LocalTime getOpenHourSaturday() {
+        return openHourSaturday;
+    }
+
+    public void setOpenHourSaturday(LocalTime openHourSaturday) {
+        this.openHourSaturday = openHourSaturday;
+    }
+
+    public LocalTime getCloseHourSaturday() {
+        return closeHourSaturday;
+    }
+
+    public void setCloseHourSaturday(LocalTime closeHourSaturday) {
+        this.closeHourSaturday = closeHourSaturday;
+    }
+
+    public LocalTime getOpenHourSunday() {
+        return openHourSunday;
+    }
+
+    public void setOpenHourSunday(LocalTime openHourSunday) {
+        this.openHourSunday = openHourSunday;
+    }
+
+    public LocalTime getCloseHourSunday() {
+        return closeHourSunday;
+    }
+
+    public void setCloseHourSunday(LocalTime closeHourSunday) {
+        this.closeHourSunday = closeHourSunday;
     }
 
     public List<Category> getCategories() {
