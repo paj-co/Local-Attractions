@@ -73,5 +73,29 @@ public class AppBusinessServiceController {
         return "redirect:/businessapp/dashboard/";
     }
 
+    @GetMapping("/update/{serviceId}")
+    public String updateService(@PathVariable long serviceId, Model model, HttpSession sess) {
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            model.addAttribute("service", service);
+            return "app/business/businessServiceUpdate";
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @PostMapping("/update/{serviceId}")
+    public String updateService(@ModelAttribute @Validated Service service, BindingResult result) {
+        if(result.hasErrors()) {
+            return "app/business/businessServiceUpdate";
+        }
+        serviceRepository.save(service);
+        return "redirect:/businessapp/service/details/" + service.getId();
+    }
+
+
+
 
 }

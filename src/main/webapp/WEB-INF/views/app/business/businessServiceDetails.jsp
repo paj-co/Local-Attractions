@@ -14,8 +14,20 @@
             <img src="<c:url value="/image/picture1.jpg" /> "/>
         </div>
         <div class="mainDetails">
-            <h3>Główne informacje:</h3>
-            
+            <h3>Główne informacje</h3>
+            <div style="float:right;">
+                <a href="<c:url value="/businessapp/service/update/${service.id}" /> ">
+                    <button>
+                        Edytuj
+                    </button>
+                </a>
+                <a href="<c:url value="/businessapp/service/delete/${service.id}" /> ">
+                    <button>
+                        Usuń
+                    </button>
+                </a>
+            </div>
+
             <div><span class="topic">Nazwa: </span><span class="content">${service.name}</span></div>
             <div><span class="topic">Krótki opis: </span><span class="content">${service.description}</span></div>
             <div><span class="topic">Informacje (dokładny opis usługi): </span><span class="content">${service.informations}</span></div>
@@ -123,7 +135,7 @@
 
             <hr/>
             <div id="category" class="lists">
-                <span class="topic">Kategorie:</span>
+                <span class="topic">Kategorie</span>
                 <c:choose>
                     <c:when test="${empty categories}">
                         <span class="empty">Nie dodano</span>
@@ -136,7 +148,7 @@
                 </c:choose>
             </div>
             <div id="tag" class="lists">
-                <span class="topic">Tagi:</span>
+                <span class="topic">Tagi</span>
                 <c:choose>
                     <c:when test="${empty tags}">
                         <span class="empty">Nie dodano</span>
@@ -156,9 +168,9 @@
         <div class="secondaryDetails">
 
             <div id="newsFeed" class="lists">
-                <h3 class="topic">Wydarzenia:</h3>
+                <h3 class="topic">Wydarzenia</h3>
 
-                <span class="insideTopic">Przyszłe:</span>
+                <span class="insideTopic">Przyszłe</span>
                 <c:choose>
                     <c:when test="${empty futureNewsFeeds}">
                         <span class="empty">Brak</span>
@@ -178,7 +190,7 @@
                     </c:otherwise>
                 </c:choose>
 
-                <span class="insideTopic">Obecne:</span>
+                <span class="insideTopic">Obecne</span>
                 <c:choose>
                     <c:when test="${empty currentNewsFeeds}">
                         <span class="empty">Brak</span>
@@ -196,7 +208,7 @@
                     </c:otherwise>
                 </c:choose>
                 
-                <span class="insideTopic">Przeszłe:</span>
+                <span class="insideTopic">Przeszłe</span>
                 <c:choose>
                     <c:when test="${empty pastNewsFeeds}">
                         <span class="empty">Brak</span>
@@ -216,9 +228,9 @@
             </div>
 
             <div id="offers" class="lists">
-                <h3 class="topic">Promocje:</h3>
+                <h3 class="topic">Promocje</h3>
 
-                <span class="insideTopic">Przyszłe:</span>
+                <span class="insideTopic">Przyszłe</span>
                 <c:choose>
                     <c:when test="${empty futureOffers}">
                         <span class="empty">Brak</span>
@@ -236,7 +248,7 @@
                     </c:otherwise>
                 </c:choose>
 
-                <span class="insideTopic">Obecne:</span>
+                <span class="insideTopic">Obecne</span>
                 <c:choose>
                     <c:when test="${empty currentOffers}">
                         <span class="empty">Brak</span>
@@ -254,7 +266,7 @@
                     </c:otherwise>
                 </c:choose>
 
-                <span class="insideTopic">Zakończone:</span>
+                <span class="insideTopic">Zakończone</span>
                 <c:choose>
                     <c:when test="${empty pastOffers}">
                         <span class="empty">Brak</span>

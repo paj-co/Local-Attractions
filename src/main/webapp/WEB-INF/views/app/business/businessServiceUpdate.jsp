@@ -3,20 +3,20 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Dodaj usługę | Lokalne Atrakcje</title>
+    <title>Zaktualizuj | Lokalne Atrakcje</title>
     <link href='<c:url value="/css/formErrors.css"/>' rel="stylesheet">
     <style>
 
     </style>
 </head>
 <body>
-
 <div id="addService">
 
-    <h2>Utwórz nową usługę:</h2>
+    <h2>Zaktualizuj usługę:</h2>
 
     <form:form method="post" modelAttribute="service">
-        <form:hidden path="business.id" value="${loggedBusiness.id}" />
+        <form:hidden path="business.id" /><%--value="${loggedBusiness.id}"--%>
+        <form:hidden path="id" />
         <div>
             Nazwa usługi:
             <form:input path="name"/>
@@ -119,10 +119,10 @@
         </div>
         <div>
             Główne zdjęcie:
-                <input type="file" name="mainPicture">
-                <div class="error">
+            <input type="file" name="mainPicture">
+            <div class="error">
 
-                </div>
+            </div>
         </div>
 
         <table>
