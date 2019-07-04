@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <html>
 <head>
     <title>Szczegóły usługi | Lokalne Atrakcje</title>
@@ -120,10 +121,7 @@
                     </tr>
                 </table>
 
-            
-        </div>
-
-        <div class="secondaryDetails">
+            <hr/>
             <div id="category" class="lists">
                 <span class="topic">Kategorie:</span>
                 <c:choose>
@@ -150,38 +148,124 @@
                     </c:otherwise>
                 </c:choose>
             </div>
+
+        </div>
+
+
+
+        <div class="secondaryDetails">
+
             <div id="newsFeed" class="lists">
-                <span class="topic">Aktualności:</span>
-                <hr/>
+                <h3 class="topic">Wydarzenia:</h3>
+
+                <span class="insideTopic">Przyszłe:</span>
                 <c:choose>
-                    <c:when test="${empty newsFeeds}">
-                        <span class="empty">Nie dodano</span>
+                    <c:when test="${empty futureNewsFeeds}">
+                        <span class="empty">Brak</span>
                     </c:when>
                     <c:otherwise>
-                        <c:forEach items="${newsFeeds}" var="newsFeed">
+                        <hr/>
+                        <c:forEach items="${futureNewsFeeds}" var="futureNewsFeed">
                             <div class="itemBody">
-                                <span class="contentTopic">${newsFeed.name} Aktywna: ${newsFeed.active}</span>
-                                <span class="contentInfo">${newsFeed.starts} - ${newsFeed.ends}</span>
-                                <span class="content">${newsFeed.description}</span>
+                                <span class="contentTopic">${futureNewsFeed.name}</span>
+                                <span class="contentInfo">
+                                    ${futureNewsFeed.starts} - ${futureNewsFeed.ends}
+                                </span>
+                                <span class="content">${futureNewsFeed.description}</span>
                             </div>
                             <hr/>
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>
-            </div>
-            <div id="offers" class="lists">
-                <span class="topic">Promocje:</span>
-                <hr/>
+
+                <span class="insideTopic">Obecne:</span>
                 <c:choose>
-                    <c:when test="${empty offers}">
-                        <span class="empty">Nie dodano</span>
+                    <c:when test="${empty currentNewsFeeds}">
+                        <span class="empty">Brak</span>
                     </c:when>
                     <c:otherwise>
-                        <c:forEach items="${offers}" var="offer">
+                        <hr/>
+                        <c:forEach items="${currentNewsFeeds}" var="currentNewsFeed">
                             <div class="itemBody">
-                                <span class="contentTopic">${offer.name} Aktywna: ${offer.active}</span>
-                                <span class="contentInfo">${offer.starts} - ${offer.ends}</span>
-                                <span class="content">${offer.description}</span>
+                                <span class="contentTopic">${currentNewsFeed.name}</span>
+                                <span class="contentInfo">${currentNewsFeed.starts} - ${currentNewsFeed.ends}</span>
+                                <span class="content">${currentNewsFeed.description}</span>
+                            </div>
+                            <hr/>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+                
+                <span class="insideTopic">Przeszłe:</span>
+                <c:choose>
+                    <c:when test="${empty pastNewsFeeds}">
+                        <span class="empty">Brak</span>
+                    </c:when>
+                    <c:otherwise>
+                        <hr/>
+                        <c:forEach items="${pastNewsFeeds}" var="pastNewsFeed">
+                            <div class="itemBody">
+                                <span class="contentTopic">${pastNewsFeed.name}</span>
+                                <span class="contentInfo">${pastNewsFeed.starts} - ${pastNewsFeed.ends}</span>
+                                <span class="content">${pastNewsFeed.description}</span>
+                            </div>
+                            <hr/>
+                        </c:forEach>
+                </c:otherwise>
+            </c:choose>
+            </div>
+
+            <div id="offers" class="lists">
+                <h3 class="topic">Promocje:</h3>
+
+                <span class="insideTopic">Przyszłe:</span>
+                <c:choose>
+                    <c:when test="${empty futureOffers}">
+                        <span class="empty">Brak</span>
+                    </c:when>
+                    <c:otherwise>
+                        <hr/>
+                        <c:forEach items="${futureOffers}" var="futureOffer">
+                            <div class="itemBody">
+                                <span class="contentTopic">${futureOffer.name}</span>
+                                <span class="contentInfo">${futureOffer.starts} - ${futureOffer.ends}</span>
+                                <span class="content">${futureOffer.description}</span>
+                            </div>
+                            <hr/>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+
+                <span class="insideTopic">Obecne:</span>
+                <c:choose>
+                    <c:when test="${empty currentOffers}">
+                        <span class="empty">Brak</span>
+                    </c:when>
+                    <c:otherwise>
+                        <hr/>
+                        <c:forEach items="${currentOffers}" var="currentOffer">
+                            <div class="itemBody">
+                                <span class="contentTopic">${currentOffer.name}</span>
+                                <span class="contentInfo">${currentOffer.starts} - ${currentOffer.ends}</span>
+                                <span class="content">${currentOffer.description}</span>
+                            </div>
+                            <hr/>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+
+                <span class="insideTopic">Zakończone:</span>
+                <c:choose>
+                    <c:when test="${empty pastOffers}">
+                        <span class="empty">Brak</span>
+                    </c:when>
+                    <c:otherwise>
+                        <hr/>
+                        <c:forEach items="${pastOffers}" var="pastOffer">
+                            <div class="itemBody">
+                                <span class="contentTopic">${pastOffer.name}</span>
+                                <span class="contentInfo">${pastOffer.starts} - ${pastOffer.ends}</span>
+                                <span class="content">${pastOffer.description}</span>
                             </div>
                             <hr/>
                         </c:forEach>

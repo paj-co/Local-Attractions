@@ -14,7 +14,6 @@ public class Offer {
     private String name;
     private String description;
 
-    boolean active;
     private LocalDateTime starts;
     private LocalDateTime ends;
 
@@ -44,14 +43,6 @@ public class Offer {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public LocalDateTime getStarts() {

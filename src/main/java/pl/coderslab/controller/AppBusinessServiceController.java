@@ -8,11 +8,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.Business;
 import pl.coderslab.entity.Category;
-import pl.coderslab.entity.NewsFeed;
 import pl.coderslab.entity.Service;
 import pl.coderslab.repository.*;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +27,7 @@ public class AppBusinessServiceController {
     @Autowired
     private NewsFeedRepository newsFeedRepository;
     @Autowired
-    private OffersRepository offersRepository;
+    private OfferRepository offerRepository;
     @Autowired
     private TagRepository tagRepository;
 
@@ -61,8 +61,12 @@ public class AppBusinessServiceController {
             }
             model.addAttribute("service", service.get());
             model.addAttribute("categories", categoryRepository.findCategoriesByServiceId(serviceId));
-            model.addAttribute("newsFeeds", newsFeedRepository.findNewsFeedByServiceId(serviceId));
-            model.addAttribute("offers", offersRepository.findOffersByServiceId(serviceId));
+            model.addAttribute("futureNewsFeeds", newsFeedRepository.findFutureNewsFeedByServiceId(serviceId, LocalDateTime.now()));
+            model.addAttribute("currentNewsFeeds", newsFeedRepository.findCurrentNewsFeedByServiceId(serviceId, LocalDateTime.now()));
+            model.addAttribute("pastNewsFeeds", newsFeedRepository.findPastNewsFeedByServiceId(serviceId, LocalDateTime.now()));
+            model.addAttribute("futureOffers", offerRepository.findFutureOfferByServiceId(serviceId, LocalDateTime.now()));
+            model.addAttribute("currentOffers", offerRepository.findCurrentOfferByServiceId(serviceId, LocalDateTime.now()));
+            model.addAttribute("pastOffers", offerRepository.findPastOfferByServiceId(serviceId, LocalDateTime.now()));
             model.addAttribute("tags", tagRepository.findTagsByServiceId(serviceId));
             return "app/business/businessServiceDetails";
         }
