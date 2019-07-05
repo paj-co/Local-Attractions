@@ -8,6 +8,8 @@
 </head>
 <body>
 
+    <%@include file="/WEB-INF/views/header.jsp"%>
+
     <div class="center">
         <div class="loginBlock">
 

@@ -81,14 +81,16 @@ public class AppBusinessServiceController {
                 return "redirect:/businessapp/dashboard/";
             }
             model.addAttribute("service", service);
+            model.addAttribute("serviceId", service.get().getId());
             return "app/business/businessServiceUpdate";
         }
         return "redirect:/businessapp/dashboard/";
     }
 
     @PostMapping("/update/{serviceId}")
-    public String updateService(@ModelAttribute @Validated Service service, BindingResult result) {
+    public String updateService(@ModelAttribute @Validated Service service, BindingResult result, Model model) {
         if(result.hasErrors()) {
+            model.addAttribute("serviceId", service.getId());
             return "app/business/businessServiceUpdate";
         }
         serviceRepository.save(service);

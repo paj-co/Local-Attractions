@@ -138,12 +138,6 @@
 
                 <hr/>
                 <div>
-                    <%--TODO link--%>
-                    <a class="right" href="<c:url value="" /> ">
-                        <button>
-                            Zarządzaj tagami i kategoriami
-                        </button>
-                    </a>
                     <div id="category" class="lists">
                         <span class="topic">Kategorie</span>
                         <c:choose>
@@ -169,6 +163,19 @@
                                 </c:forEach>
                             </c:otherwise>
                         </c:choose>
+                    </div>
+                    <div id="panel" class="lists">
+                        <%--TODO link--%>
+                        <a href="<c:url value="" /> ">
+                            <button>
+                                Zarządzaj kategoriami
+                            </button>
+                        </a>
+                        <a href="<c:url value="" /> ">
+                            <button>
+                                Zarządzaj tagami
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>

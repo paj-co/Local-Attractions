@@ -7,6 +7,8 @@
 
 </head>
 <body>
+    <%@include file="/WEB-INF/views/header.jsp"%>
+
     <div id="register" class="center">
         <div class="loginBlock">
             <h3>Zarejestruj się!</h3>

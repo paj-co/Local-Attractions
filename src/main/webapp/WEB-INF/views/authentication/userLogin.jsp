@@ -9,6 +9,8 @@
 </head>
 <body>
 
+    <%@include file="/WEB-INF/views/header.jsp"%>
+
     <div class="main center">
         <div class="form loginBlock">
             <h3>Zaloguj się jako użytkownik:</h3>

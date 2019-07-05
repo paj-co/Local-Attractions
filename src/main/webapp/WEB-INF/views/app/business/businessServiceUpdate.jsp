@@ -10,12 +10,15 @@
     </style>
 </head>
 <body>
+
+<%@include file="/WEB-INF/views/app/businessHeader.jsp"%>
+
 <div id="addService">
 
     <h2>Zaktualizuj usługę:</h2>
 
     <form:form method="post" modelAttribute="service">
-        <form:hidden path="business.id" /><%--value="${loggedBusiness.id}"--%>
+        <form:hidden path="business.id" />
         <form:hidden path="id" />
         <div>
             Nazwa usługi:
@@ -268,11 +271,15 @@
 
         </table>
 
-        <input type="submit" value="Zapisz">
+        <input class="left" type="submit" value="Zapisz">
+        <a class="right" href="<c:url value="/businessapp/service/details/${serviceId}" />">
+            <button type="button">Anuluj</button>
+        </a>
     </form:form>
 
-</div>
 
+
+</div>
 
 </body>
 </html>

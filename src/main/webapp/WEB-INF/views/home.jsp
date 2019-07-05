@@ -3,16 +3,16 @@
 <html>
 <head>
     <title>Strona główna | Lokalne Atrakcje</title>
+    <link href="<c:url value="/css/formErrors.css" />" rel="stylesheet" >
 </head>
 <body>
     <div id="home">
-        <a href="<c:url value="/authentication/login/user" />">
-            <button>Logowanie</button>
-        </a>
-        <a href="<c:url value="/register" />">
-            <button>Rejestracja</button>
-        </a>
-        <h1>Witaj na naszej stronie głównej</h1>
+
+        <%@include file="/WEB-INF/views/header.jsp"%>
+
+        <div id="main">
+            <h1>Witaj na naszej stronie głównej</h1>
+        </div>
 
     </div>
 
