@@ -3,12 +3,12 @@
 <html>
 <head>
     <title>${loggedBusiness.name} | Lokalne Atrakcje</title>
+    <link href="<c:url value="/css/formErrors.css" />" rel="stylesheet" >
 </head>
 <body>
 
-    <a href="<c:url value="/businessapp/logout/" />">
-        <button>Wylogowanie</button>
-    </a>
+    <%@include file="/WEB-INF/views/app/businessHeader.jsp"%>
+
     <h1>Witaj, ${loggedBusiness.name}!</h1>
 
     <h2>Moje usługi:</h2>

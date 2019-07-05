@@ -5,9 +5,7 @@
 <head>
     <title>Dodaj usługę | Lokalne Atrakcje</title>
     <link href='<c:url value="/css/formErrors.css"/>' rel="stylesheet">
-    <style>
 
-    </style>
 </head>
 <body>
 

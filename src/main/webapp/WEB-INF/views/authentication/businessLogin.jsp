@@ -8,7 +8,7 @@
 
 </head>
 <body>
-<div class="main">
+<div class="main center">
     <div class="loginBlock">
         <h4>Zaloguj się jako użytkownik:</h4>
 

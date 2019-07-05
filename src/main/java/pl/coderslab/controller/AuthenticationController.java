@@ -11,6 +11,7 @@ import pl.coderslab.model.BusinessLogin;
 import pl.coderslab.model.UserLogin;
 import pl.coderslab.service.AuthenticationService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
@@ -25,7 +26,13 @@ public class AuthenticationController {
 
 //--------------- [User] -------------------------------------------------------------------------------------------
     @GetMapping("/login/user")
-    public String loginUser(Model model) {
+    public String loginUser(Model model, HttpSession sess) {
+        if(((Business)sess.getAttribute("loggedBusiness")) != null) {
+            return "redirect:/businessapp/dashboard/";
+        }
+        if(((User)sess.getAttribute("loggedUser")) != null) {
+            return "redirect:/userapp/dashboard/";
+        }
         model.addAttribute("userLogin", new UserLogin());
         return "authentication/userLogin";
     }

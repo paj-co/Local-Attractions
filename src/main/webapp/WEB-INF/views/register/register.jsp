@@ -7,16 +7,17 @@
 
 </head>
 <body>
+    <div id="register" class="center">
+        <div class="loginBlock">
+            <h3>Zarejestruj się!</h3>
 
-    <div class="loginBlock">
-        <h3>Zarejestruj się!</h3>
-
-        <a href="<c:url value="/register/user" />" >
-            <button>Jako użytkownik</button>
-        </a>
-        <a href="<c:url value="/register/business" />" >
-            <button>Jako firma</button>
-        </a>
+            <a href="<c:url value="/register/user" />" >
+                <button>Jako użytkownik</button>
+            </a>
+            <a href="<c:url value="/register/business" />" >
+                <button>Jako firma</button>
+            </a>
+        </div>
     </div>
 
 

@@ -8,52 +8,54 @@
 </head>
 <body>
 
-    <div class="loginBlock">
+    <div class="center">
+        <div class="loginBlock">
 
-        <h3>Zarejestruj się:</h3>
+            <h3>Zarejestruj się:</h3>
 
-        <form:form method="post" modelAttribute="user">
-            <div>
-                Imię:
-                <form:input path="firstName"/>
-                <div class="error">
-                    <form:errors path="firstName" cssClass="error" />
+            <form:form method="post" modelAttribute="user">
+                <div>
+                    Imię:
+                    <form:input path="firstName"/>
+                    <div class="error">
+                        <form:errors path="firstName" cssClass="error" />
+                    </div>
                 </div>
-            </div>
-            <div>
-            Nazwisko:
-                <form:input path="lastName"/>
-                <div class="error">
-                    <form:errors path="lastName" cssClass="error" />
+                <div>
+                Nazwisko:
+                    <form:input path="lastName"/>
+                    <div class="error">
+                        <form:errors path="lastName" cssClass="error" />
+                    </div>
                 </div>
-            </div>
-            <div>
-                Nick:
-                <form:input path="nickName"/> *opcjonalnie
-                <div class="error">
-                    <form:errors path="nickName" cssClass="error" />
+                <div>
+                    Nick:
+                    <form:input path="nickName"/> *opcjonalnie
+                    <div class="error">
+                        <form:errors path="nickName" cssClass="error" />
+                    </div>
                 </div>
-            </div>
-            <div>
-            E-mail:
-                <form:input path="email"/>
-                <div class="error">
-                    <form:errors path="email" cssClass="error" />
-                    <c:if test="${not empty emailError}">
-                        <span class="error">${emailError}</span>
-                    </c:if>
+                <div>
+                E-mail:
+                    <form:input path="email"/>
+                    <div class="error">
+                        <form:errors path="email" cssClass="error" />
+                        <c:if test="${not empty emailError}">
+                            <span class="error">${emailError}</span>
+                        </c:if>
+                    </div>
                 </div>
-            </div>
-            <div>
-                Hasło:
-                <form:password path="password"/>
-                <div class="error">
-                    <form:errors path="password" cssClass="error" />
+                <div>
+                    Hasło:
+                    <form:password path="password"/>
+                    <div class="error">
+                        <form:errors path="password" cssClass="error" />
+                    </div>
                 </div>
-            </div>
-            <input type="submit" value="Zaloguj sie">
-        </form:form>
+                <input type="submit" value="Zaloguj sie">
+            </form:form>
 
+        </div>
     </div>
 
 </body>

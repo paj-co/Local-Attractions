@@ -1,3 +1,46 @@
+#header{
+    width: 100%;
+    height: 70px;
+    background-color: #326a67;
+    box-shadow: 0 0 30px rgba(16,14,23,.5);
+    margin-bottom: 10px;
+    border-radius: 0 0 10px 10px;
+    border: 2px solid #ffd55c;
+    max-width: 1200px;
+    min-width: 600px;
+}
+#header div{
+    display: inline-block;
+    padding: 0 10px;
+}
+#header div.button{
+    background-color: #5c8adb;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid darkgray;
+    text-decoration: none;
+}
+#header div a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.85em;
+}
+#header .logo{
+    color: #ffd55c;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 20px;
+}
+.center{
+    margin: 0 auto;
+    max-width: max-content;
+}
+.centerText{
+    text-align: center;
+}
+.padding{
+    padding: 0 5px 0;
+}
 div.error{
     color: red;
     background-color: #e4bdcb;
@@ -8,6 +51,9 @@ div.error{
 span.error{
     font-size: 0.8em;
     padding-left: 5px;
+}
+#home a {
+    text-decoration: none;
 }
 .loginBlock {
     display: inline-block;
@@ -61,8 +107,6 @@ body {
     background-color: #ffffff;
 }
 #serviceDetails{
-    width: 90%;
-    margin: 0 auto;
     font-size: 0.9em;
 }
 #serviceDetails .topic{
@@ -75,14 +119,20 @@ body {
 #serviceDetails .mainDetails {
     margin-right: 20px;
 }
+#serviceDetails .left{
+    float: left;
+}
+#serviceDetails .right{
+    float: right;
+}
 #serviceDetails .mainDetails, .secondaryDetails{
     display: inline-block;
     vertical-align: top;
     border-radius: 10px;
     width: 47%;
     min-width: 400px;
+    max-width: 600px;
     background-color: #ffd55c;
-    padding: 0 5px 0 5px;
     box-shadow: 0 0 30px rgba(16,14,23,.5);
     border: 2px solid #326a67;
 }
@@ -108,7 +158,7 @@ body {
 #serviceDetails #category .content, #tag .content{
     display: block;
     border-radius: 5% 20% 5%;
-    background-color: #cbcbcb;
+    background-color: #97b0cb;
     padding: 2px;
     width: max-content;
 }
@@ -121,7 +171,6 @@ body {
 }
 #serviceDetails .itemBody{
     background-color: #fdfdfd;
-    margin-bottom: 10px;
 }
 #serviceDetails #newsFeed span, #offers span{
     display: block;
@@ -130,15 +179,10 @@ body {
     padding: 2px;
     margin-left: 10px;
 }
-#serviceDetails #picture{
-    margin: 0 auto 10px;
-    max-width: 60%;
-}
 #serviceDetails #picture img{
-    border: 5px solid #326a67;
+    border-bottom: 1px solid #326a67;
     max-width: 100%;
     height: auto;
-    margin: 0 auto;
     border-radius: 10px;
     box-shadow: 0 0 30px rgba(16,14,23,.25);
 }
@@ -158,6 +202,22 @@ body {
 }
 #serviceDetails a{
     text-decoration: none;
+}
+#serviceDetails .secondaryDetails button.functionalButton {
+    padding: 0 2px;
+    margin: 2px;
+    font-size: 0.8em;
+    border-radius: 4px;
+    background-color: #326a67;
+    color: white;
+}
+
+#serviceDetails .secondaryDetails button.functionalButton:hover {
+    background-color: #8c5d50;
+    color: white;
+}
+#serviceDetails button{
+    font-size: 0.9em;
 }
 
 
