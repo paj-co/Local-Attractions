@@ -1,6 +1,6 @@
 package pl.coderslab.entity;
 
-import validation.UniqueEmail;
+import pl.coderslab.validation.UniqueEmail;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

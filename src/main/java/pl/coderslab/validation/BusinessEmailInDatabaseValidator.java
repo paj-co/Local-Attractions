@@ -1,4 +1,4 @@
-package validation;
+package pl.coderslab.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.coderslab.service.AuthenticationService;

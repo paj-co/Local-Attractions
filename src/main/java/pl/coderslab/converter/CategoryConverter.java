@@ -15,9 +15,6 @@ public class CategoryConverter implements Converter<String, Category> {
     @Override
     public Category convert(String id) {
         Optional<Category> category = categoryRepository.findById(Long.parseLong(id));
-        if(category.isPresent()) {
-            return category.get();
-        }
-        return null;
+        return category.orElse(null);
     }
 }

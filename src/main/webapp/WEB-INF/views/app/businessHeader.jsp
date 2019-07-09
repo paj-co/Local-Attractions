@@ -9,6 +9,9 @@
             Strona główna
         </a>
     </div>
+    <div class="headerName">
+        <span>${loggedBusiness.name}</span>
+    </div>
     <div class="inline button">
         <a href="<c:url value="/businessapp/logout/" />">
             Wylogowanie

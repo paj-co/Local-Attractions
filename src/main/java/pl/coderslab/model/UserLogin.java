@@ -1,6 +1,6 @@
 package pl.coderslab.model;
 
-import validation.UserEmailInDatabase;
+import pl.coderslab.validation.UserEmailInDatabase;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

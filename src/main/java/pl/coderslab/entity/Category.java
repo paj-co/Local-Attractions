@@ -2,6 +2,7 @@ package pl.coderslab.entity;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "categories")
@@ -14,11 +15,12 @@ public class Category {
     private String name;
     private String description;
 
-    @ManyToMany
-    @JoinTable(name = "services_categories",
-            joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "service_id"))
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
     private List<Service> services;
+
+    @ManyToOne
+    @JoinColumn(name = "main_category_id")
+    private MainCategory mainCategory;
 
     @Override
     public String toString() {
@@ -29,6 +31,15 @@ public class Category {
                 ", services=" + services +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(id, category.id);
+    }
+
 
     public Long getId() {
         return id;

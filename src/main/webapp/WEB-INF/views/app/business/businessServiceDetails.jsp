@@ -24,7 +24,7 @@
                     </button>
                 </a>
 
-                <a class="right" href="<c:url value="/businessapp/service/delete/${service.id}" /> ">
+                <a class="right" href="<c:url value="/businessapp/service/delete/confirm/${service.id}" /> ">
                     <button>
                         Usuń
                     </button>
@@ -47,7 +47,7 @@
                 <div><span class="topic">Miejscowość: </span><span class="content">${service.locality}</span></div>
                 <div><span class="topic">Kod pocztowy: </span><span class="content">${service.zipCode}</span></div>
 
-                <div><span class="topic">E-mail usługi:: </span><span class="content">${service.email}</span></div>
+                <div><span class="topic">E-mail usługi: </span><span class="content">${service.email}</span></div>
                 <div><span class="topic">Nr telefonu: </span><span class="content">${service.phone}</span></div>
 
 
@@ -166,7 +166,7 @@
                     </div>
                     <div id="panel" class="lists">
                         <%--TODO link--%>
-                        <a href="<c:url value="" /> ">
+                        <a href="<c:url value="/businessapp/service/${service.id}/categories/" /> ">
                             <button>
                                 Zarządzaj kategoriami
                             </button>

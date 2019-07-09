@@ -3,7 +3,6 @@ package pl.coderslab.entity;
 
 import org.hibernate.validator.constraints.pl.NIP;
 import org.hibernate.validator.constraints.pl.REGON;
-import validation.UniqueEmail;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -26,7 +25,9 @@ public class Business {
     private String email;
 
     @NotBlank
-    @Size(min = 8)
+
+    //TODO change to 8, 1 is for testing
+    @Size(min = 1)
     //TODO @Anotation: password mast contain aat least 1 big, 1 small letter, 1 digit, 1 special character
     private String password;
 

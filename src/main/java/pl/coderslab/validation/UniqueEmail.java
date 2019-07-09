@@ -1,4 +1,5 @@
-package validation;
+package pl.coderslab.validation;
+
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -7,15 +8,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = BusinessEmailInDatabaseValidator.class)
+@Constraint(validatedBy = UniqueEmailValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface BusinessEmailInDatabase {
+public @interface UniqueEmail {
 
-    String message() default "{emailInDatabase.error.message}";
+    String message() default "{uniqueEmail.error.message}";
 
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 
 }
-

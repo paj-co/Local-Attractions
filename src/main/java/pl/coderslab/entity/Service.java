@@ -1,13 +1,11 @@
 package pl.coderslab.entity;
 
-import validation.UniqueEmail;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "services")
@@ -25,7 +23,7 @@ public class Service {
 //    //TODO is picture necessary
     private File mainPicture;
 
-    //TODO make annotation -> with validation
+    //TODO make annotation -> with pl.coderslab.validation
     @ManyToOne
     @JoinColumn(name = "province_id")
     private Province province; //(in polish: województwo)
@@ -58,7 +56,8 @@ public class Service {
     private String phone;
 
     @NotBlank
-    @Column(length = 1000)
+    @Column(length = 4000)
+    @Size(max = 4000)
     private String informations;
 
     @NotNull
@@ -90,16 +89,23 @@ public class Service {
     @NotNull
     private LocalTime closeHourSunday;
 
-    @ManyToMany(mappedBy = "services")
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH
+    }, fetch = FetchType.EAGER)
+    @JoinTable(name = "services_categories",
+            joinColumns = @JoinColumn(name = "service_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories;
 
-    @OneToMany(mappedBy = "service")
+    @OneToMany(mappedBy = "service", cascade = CascadeType.REMOVE)
     private List<Offer> offers;
 
-    @OneToMany(mappedBy = "service")
+    @OneToMany(mappedBy = "service", cascade = CascadeType.REMOVE)
     private List<NewsFeed> newsFeed;
 
-    @OneToMany(mappedBy = "service")
+    @OneToMany(mappedBy = "service", cascade = CascadeType.REMOVE)
     private List<Tag> tags;
 
     @ManyToOne

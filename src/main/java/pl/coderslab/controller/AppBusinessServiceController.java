@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.Business;
 import pl.coderslab.entity.Category;
 import pl.coderslab.entity.Service;
+import pl.coderslab.model.ServiceCategories;
 import pl.coderslab.repository.*;
 
 import javax.servlet.http.HttpSession;
@@ -97,7 +98,67 @@ public class AppBusinessServiceController {
         return "redirect:/businessapp/service/details/" + service.getId();
     }
 
+    @GetMapping("/delete/confirm/{serviceId}")
+    public String confirmDeleteService(@PathVariable long serviceId, Model model, HttpSession sess) {
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            model.addAttribute("serviceToDelete", service.get());
+            return "app/business/businessConfirmServiceDelete";
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
 
+    @GetMapping("/delete/{serviceId}")
+    public String deleteService(@PathVariable long serviceId, HttpSession sess) {
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            serviceRepository.delete(service.get());
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
 
+    @GetMapping("/{serviceId}/categories/")
+    public String addCategoriesToService(@PathVariable long serviceId, Model model, HttpSession sess){
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            List<Category> serviceCategoriesList = service.get().getCategories();
+            List<Category> allCategories = categoryRepository.findAll();
 
+            allCategories.removeAll(serviceCategoriesList);
+
+            ServiceCategories serviceCategoriesModel = new ServiceCategories();
+            serviceCategoriesModel.setServiceId(service.get().getId());
+            serviceCategoriesModel.setServiceCategories(serviceCategoriesList);
+            serviceCategoriesModel.setRemainingCategories(allCategories);
+
+            model.addAttribute("serviceCategories", serviceCategoriesModel);
+            return "app/business/businessAddCategories";
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @PostMapping("/{serviceId}/categories/")
+    public String addCategoriesToService(@ModelAttribute ServiceCategories serviceCategories ,Model model){
+//            model.asMap().forEach((k, v) -> System.out.println(k + ": " + v));
+        Optional<Service> service = serviceRepository.findById(serviceCategories.getServiceId());
+        if(service.isPresent()) {
+            List<Category> categories = serviceCategories.getServiceCategories();
+            if (serviceCategories.getRemainingCategories() != null) {
+                categories.addAll(serviceCategories.getRemainingCategories());
+            }
+            service.get().setCategories(categories);
+            serviceRepository.save(service.get());
+            return "redirect:/businessapp/service/details/" + service.get().getId();
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
 }
