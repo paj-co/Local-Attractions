@@ -1,6 +1,11 @@
 package pl.coderslab.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -11,11 +16,17 @@ public class NewsFeed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 5, max = 50)
     private String name;
+    @Size(min = 10, max = 400)
     private String description;
 
-    private LocalDateTime starts;
-    private LocalDateTime ends;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate starts;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate ends;
 
     @ManyToOne
     @JoinColumn(name = "service_id")
@@ -45,19 +56,19 @@ public class NewsFeed {
         this.description = description;
     }
 
-    public LocalDateTime getStarts() {
+    public LocalDate getStarts() {
         return starts;
     }
 
-    public void setStarts(LocalDateTime starts) {
+    public void setStarts(LocalDate starts) {
         this.starts = starts;
     }
 
-    public LocalDateTime getEnds() {
+    public LocalDate getEnds() {
         return ends;
     }
 
-    public void setEnds(LocalDateTime ends) {
+    public void setEnds(LocalDate ends) {
         this.ends = ends;
     }
 

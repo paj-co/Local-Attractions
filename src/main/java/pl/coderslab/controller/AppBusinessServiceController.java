@@ -8,11 +8,14 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.Business;
 import pl.coderslab.entity.Category;
+import pl.coderslab.entity.NewsFeed;
 import pl.coderslab.entity.Service;
 import pl.coderslab.model.ServiceCategories;
 import pl.coderslab.repository.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -64,9 +67,9 @@ public class AppBusinessServiceController {
             }
             model.addAttribute("service", service.get());
             model.addAttribute("categories", categoryRepository.findCategoriesByServiceId(serviceId));
-            model.addAttribute("futureNewsFeeds", newsFeedRepository.findFutureNewsFeedByServiceId(serviceId, LocalDateTime.now()));
-            model.addAttribute("currentNewsFeeds", newsFeedRepository.findCurrentNewsFeedByServiceId(serviceId, LocalDateTime.now()));
-            model.addAttribute("pastNewsFeeds", newsFeedRepository.findPastNewsFeedByServiceId(serviceId, LocalDateTime.now()));
+            model.addAttribute("futureNewsFeeds", newsFeedRepository.findFutureNewsFeedByServiceId(serviceId, LocalDate.now()));
+            model.addAttribute("currentNewsFeeds", newsFeedRepository.findCurrentNewsFeedByServiceId(serviceId, LocalDate.now()));
+            model.addAttribute("pastNewsFeeds", newsFeedRepository.findPastNewsFeedByServiceId(serviceId, LocalDate.now()));
             model.addAttribute("futureOffers", offerRepository.findFutureOfferByServiceId(serviceId, LocalDateTime.now()));
             model.addAttribute("currentOffers", offerRepository.findCurrentOfferByServiceId(serviceId, LocalDateTime.now()));
             model.addAttribute("pastOffers", offerRepository.findPastOfferByServiceId(serviceId, LocalDateTime.now()));
@@ -171,4 +174,33 @@ public class AppBusinessServiceController {
         }
         return "redirect:/businessapp/dashboard/";
     }
+
+    @GetMapping("/{serviceId}/news")
+    public String addNewsToService(@PathVariable long serviceId, Model model, HttpSession sess){
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            model.addAttribute("newsFeed", new NewsFeed());
+            model.addAttribute("serviceId", service.get().getId());
+            return "app/business/businessAddNews";
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @PostMapping("/{serviceId}/news")
+    public String addNewsToService(@PathVariable long serviceId, @ModelAttribute @Valid NewsFeed newsFeed, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return "app/business/businessAddNews";
+        }
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            newsFeedRepository.save(newsFeed);
+            return "redirect:/businessapp/service/details/" + service.get().getId();
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+
 }

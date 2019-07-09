@@ -185,7 +185,7 @@
 
             <div id="newsFeed" class="lists">
                 <%--TODO link--%>
-                <a class="right" href="<c:url value="" /> ">
+                <a class="right" href="<c:url value="/businessapp/service/${service.id}/news" /> ">
                     <button>
                         Dodaj
                     </button>
