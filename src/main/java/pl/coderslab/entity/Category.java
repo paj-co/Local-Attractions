@@ -72,4 +72,12 @@ public class Category {
     public void setServices(List<Service> services) {
         this.services = services;
     }
+
+    public MainCategory getMainCategory() {
+        return mainCategory;
+    }
+
+    public void setMainCategory(MainCategory mainCategory) {
+        this.mainCategory = mainCategory;
+    }
 }

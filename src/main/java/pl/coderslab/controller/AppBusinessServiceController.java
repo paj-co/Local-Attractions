@@ -31,6 +31,8 @@ public class AppBusinessServiceController {
     private OfferRepository offerRepository;
     @Autowired
     private TagRepository tagRepository;
+    @Autowired
+    private MainCategoryRepository mainCategoryRepository;
 
     //TODO move to addingnewcategory to a service view
     @ModelAttribute("categories")
@@ -131,7 +133,7 @@ public class AppBusinessServiceController {
                 return "redirect:/businessapp/dashboard/";
             }
             List<Category> serviceCategoriesList = service.get().getCategories();
-            List<Category> allCategories = categoryRepository.findAll();
+            List<Category> allCategories = categoryRepository.findCategoriesByOrderByNameAsc();
 
             allCategories.removeAll(serviceCategoriesList);
 
@@ -140,6 +142,7 @@ public class AppBusinessServiceController {
             serviceCategoriesModel.setServiceCategories(serviceCategoriesList);
             serviceCategoriesModel.setRemainingCategories(allCategories);
 
+            model.addAttribute("mainCategories", mainCategoryRepository.findMainCategoriesByOrderByNameAsc());
             model.addAttribute("serviceCategories", serviceCategoriesModel);
             return "app/business/businessAddCategories";
         }
@@ -147,16 +150,23 @@ public class AppBusinessServiceController {
     }
 
     @PostMapping("/{serviceId}/categories/")
-    public String addCategoriesToService(@ModelAttribute ServiceCategories serviceCategories ,Model model){
-//            model.asMap().forEach((k, v) -> System.out.println(k + ": " + v));
+    public String addCategoriesToService(@ModelAttribute ServiceCategories serviceCategories){
         Optional<Service> service = serviceRepository.findById(serviceCategories.getServiceId());
         if(service.isPresent()) {
-            List<Category> categories = serviceCategories.getServiceCategories();
-            if (serviceCategories.getRemainingCategories() != null) {
-                categories.addAll(serviceCategories.getRemainingCategories());
+            if(serviceCategories.getServiceCategories() != null) {
+                List<Category> categories = serviceCategories.getServiceCategories();
+                if (serviceCategories.getRemainingCategories() != null) {
+                    categories.addAll(serviceCategories.getRemainingCategories());
+                }
+
+                service.get().setCategories(categories);
+                serviceRepository.save(service.get());
+            } else if (serviceCategories.getRemainingCategories() != null)  {
+                List<Category> categories = serviceCategories.getRemainingCategories();
+
+                service.get().setCategories(categories);
+                serviceRepository.save(service.get());
             }
-            service.get().setCategories(categories);
-            serviceRepository.save(service.get());
             return "redirect:/businessapp/service/details/" + service.get().getId();
         }
         return "redirect:/businessapp/dashboard/";

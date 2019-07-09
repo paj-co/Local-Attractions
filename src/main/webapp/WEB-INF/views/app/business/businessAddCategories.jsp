@@ -13,17 +13,33 @@
     <div id="serviceCategories" class="center">
         <form:form method="post" modelAttribute="serviceCategories">
 
-            <c:forEach items="${serviceCategories.remainingCategories}" var="category" >
-                <form:checkbox path="remainingCategories" value="${category.id}" label="${category.name}" />
+            <c:forEach  items="${mainCategories}" var="mainCategory" >
+                <div class="mainCategory">
+                    <span class="categoryTitle">${mainCategory.name}</span>
+                    <c:forEach items="${serviceCategories.serviceCategories}" var="category" >
+                        <c:if test="${mainCategory.id eq category.mainCategory.id}" >
+                            <span class="checkbox">
+                                <form:checkbox path="serviceCategories" value="${category.id}" label="${category.name}" checked="true" />
+                            </span>
+                        </c:if>
+                    </c:forEach>
+
+                    <c:forEach items="${serviceCategories.remainingCategories}" var="category" >
+                        <c:if test="${mainCategory.id eq category.mainCategory.id}" >
+                            <span class="checkbox">
+                                <form:checkbox path="remainingCategories" value="${category.id}" label="${category.name}" />
+                            </span>
+                        </c:if>
+                    </c:forEach>
+                </div>
             </c:forEach>
 
-            <form:checkboxes path="serviceCategories" items="${serviceCategories.serviceCategories}" itemLabel="name" itemValue="id"/>
-
-
+            <div>
             <input type="submit" value="Zapisz">
-            <a href="<c:url value="/businessapp/service/details/${serviceCategories.serviceId}" />">
-                <button type="button">Anuluj</button>
-            </a>
+                <a href="<c:url value="/businessapp/service/details/${serviceCategories.serviceId}" />">
+                    <button type="button">Anuluj</button>
+                </a>
+            </div>
 
         </form:form>
     </div>
