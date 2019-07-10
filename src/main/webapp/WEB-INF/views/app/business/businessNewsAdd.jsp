@@ -4,10 +4,13 @@
 <html>
 <head>
     <title>Dodaj wydarzenie | Lokalne Atrakcje</title>
+    <link href="<c:url value="/css/formErrors.css" />" rel="stylesheet" >
 </head>
 <body>
 
-    <div id="newsFeed center">
+    <%@include file="/WEB-INF/views/app/businessHeader.jsp"%>
+
+    <div id="newsFeed" class="center base">
 
         <form:form method="post" modelAttribute="newsFeed">
 
@@ -28,16 +31,19 @@
                 </div>
             </div>
 
-            <div class="inline">
-                Data i czas rozpoczęcia (yyyy-mm-dd):
+            <div class="inline medium">
+                Data rozpoczęcia (yyyy-mm-dd):
                 <form:input path="starts"/>
                 <div class="error">
                     <form:errors path="starts" cssClass="error" />
+                    <c:if test="${not empty dateError}">
+                        <span class="error">${dateError}</span>
+                    </c:if>
                 </div>
             </div>
 
-            <div class="inline short">
-                Data i czas zakończenia (yyyy-mm-dd):
+            <div class="inline medium">
+                Data zakończenia (yyyy-mm-dd):
                 <form:input path="ends"/>
                 <div class="error">
                     <form:errors path="ends" cssClass="error" />

@@ -165,12 +165,12 @@
                         </c:choose>
                     </div>
                     <div id="panel" class="lists">
-                        <%--TODO link--%>
                         <a href="<c:url value="/businessapp/service/${service.id}/categories/" /> ">
                             <button>
                                 Zarządzaj kategoriami
                             </button>
                         </a>
+                        <%--TODO link--%>
                         <a href="<c:url value="" /> ">
                             <button>
                                 Zarządzaj tagami
@@ -184,8 +184,7 @@
         <div class="secondaryDetails padding">
 
             <div id="newsFeed" class="lists">
-                <%--TODO link--%>
-                <a class="right" href="<c:url value="/businessapp/service/${service.id}/news" /> ">
+                <a class="right" href="<c:url value="/businessapp/service/${service.id}/news/add" /> ">
                     <button>
                         Dodaj
                     </button>
@@ -193,7 +192,7 @@
 
                 <h3 class="topic">Wydarzenia</h3>
 
-                <span class="insideTopic">Przyszłe</span>
+                <span class="insideTopicFuture">Przyszłe</span>
                 <c:choose>
                     <c:when test="${empty futureNewsFeeds}">
                         <span class="empty">Brak</span>
@@ -201,21 +200,19 @@
                     <c:otherwise>
                         <hr/>
                         <c:forEach items="${futureNewsFeeds}" var="futureNewsFeed">
-                            <div class="itemBody">
+                            <div class="itemBodyFuture">
                                 <span class="contentTopic">${futureNewsFeed.name}</span>
                                 <span class="contentInfo">
                                     ${futureNewsFeed.starts} - ${futureNewsFeed.ends}
                                 </span>
                                 <span class="content">${futureNewsFeed.description}</span>
                             </div>
-                            <%--TODO link--%>
-                            <a  href="<c:url value="" /> ">
+                            <a  href="<c:url value="/businessapp/service/${service.id}/news/update/${futureNewsFeed.id}" /> ">
                                 <button class="functionalButton">
                                     Edytuj
                                 </button>
                             </a>
-                            <%--TODO link--%>
-                            <a class="right" href="<c:url value="" /> ">
+                            <a class="right" href="<c:url value="/businessapp/service/${service.id}/news/delete/confirm/${futureNewsFeed.id}" /> ">
                                 <button class="functionalButton">
                                     Usuń
                                 </button>
@@ -225,7 +222,7 @@
                     </c:otherwise>
                 </c:choose>
 
-                <span class="insideTopic">Obecne</span>
+                <span class="insideTopicCurrent">Obecne</span>
                 <c:choose>
                     <c:when test="${empty currentNewsFeeds}">
                         <span class="empty">Brak</span>
@@ -233,17 +230,27 @@
                     <c:otherwise>
                         <hr/>
                         <c:forEach items="${currentNewsFeeds}" var="currentNewsFeed">
-                            <div class="itemBody">
+                            <div class="itemBodyCurrent">
                                 <span class="contentTopic">${currentNewsFeed.name}</span>
                                 <span class="contentInfo">${currentNewsFeed.starts} - ${currentNewsFeed.ends}</span>
                                 <span class="content">${currentNewsFeed.description}</span>
                             </div>
+                            <a  href="<c:url value="/businessapp/service/${service.id}/news/update/${currentNewsFeed.id}" /> ">
+                                <button class="functionalButton">
+                                    Edytuj
+                                </button>
+                            </a>
+                            <a class="right" href="<c:url value="/businessapp/service/${service.id}/news/delete/confirm/${currentNewsFeed.id}" /> ">
+                                <button class="functionalButton">
+                                    Usuń
+                                </button>
+                            </a>
                             <hr/>
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>
                 
-                <span class="insideTopic">Przeszłe</span>
+                <span class="insideTopicPast">Przeszłe</span>
                 <c:choose>
                     <c:when test="${empty pastNewsFeeds}">
                         <span class="empty">Brak</span>
@@ -251,11 +258,21 @@
                     <c:otherwise>
                         <hr/>
                         <c:forEach items="${pastNewsFeeds}" var="pastNewsFeed">
-                            <div class="itemBody">
+                            <div class="itemBodyPast">
                                 <span class="contentTopic">${pastNewsFeed.name}</span>
                                 <span class="contentInfo">${pastNewsFeed.starts} - ${pastNewsFeed.ends}</span>
                                 <span class="content">${pastNewsFeed.description}</span>
                             </div>
+                            <a  href="<c:url value="/businessapp/service/${service.id}/news/update/${pastNewsFeed.id}" /> ">
+                                <button class="functionalButton">
+                                    Edytuj
+                                </button>
+                            </a>
+                            <a class="right" href="<c:url value="/businessapp/service/${service.id}/news/delete/confirm/${pastNewsFeed.id}" /> ">
+                                <button class="functionalButton">
+                                    Usuń
+                                </button>
+                            </a>
                             <hr/>
                         </c:forEach>
                 </c:otherwise>
@@ -264,8 +281,7 @@
 
             <div id="offers" class="lists">
 
-                <%--TODO link--%>
-                <a class="right" href="<c:url value="" /> ">
+                    <a class="right" href="<c:url value="/businessapp/service/${service.id}/offer/add" /> ">
                     <button>
                         Dodaj
                     </button>
@@ -273,7 +289,7 @@
 
                 <h3 class="topic">Promocje</h3>
 
-                <span class="insideTopic">Przyszłe</span>
+                <span class="insideTopicFuture">Przyszłe</span>
                 <c:choose>
                     <c:when test="${empty futureOffers}">
                         <span class="empty">Brak</span>
@@ -281,17 +297,27 @@
                     <c:otherwise>
                         <hr/>
                         <c:forEach items="${futureOffers}" var="futureOffer">
-                            <div class="itemBody">
+                            <div class="itemBodyFuture">
                                 <span class="contentTopic">${futureOffer.name}</span>
                                 <span class="contentInfo">${futureOffer.starts} - ${futureOffer.ends}</span>
                                 <span class="content">${futureOffer.description}</span>
                             </div>
+                            <a  href="<c:url value="/businessapp/service/${service.id}/offer/update/${futureOffer.id}" /> ">
+                                <button class="functionalButton">
+                                    Edytuj
+                                </button>
+                            </a>
+                            <a class="right" href="<c:url value="/businessapp/service/${service.id}/offer/delete/confirm/${futureOffer.id}" /> ">
+                                <button class="functionalButton">
+                                    Usuń
+                                </button>
+                            </a>
                             <hr/>
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>
 
-                <span class="insideTopic">Obecne</span>
+                <span class="insideTopicCurrent">Obecne</span>
                 <c:choose>
                     <c:when test="${empty currentOffers}">
                         <span class="empty">Brak</span>
@@ -299,17 +325,27 @@
                     <c:otherwise>
                         <hr/>
                         <c:forEach items="${currentOffers}" var="currentOffer">
-                            <div class="itemBody">
+                            <div class="itemBodyCurrent">
                                 <span class="contentTopic">${currentOffer.name}</span>
                                 <span class="contentInfo">${currentOffer.starts} - ${currentOffer.ends}</span>
                                 <span class="content">${currentOffer.description}</span>
                             </div>
+                            <a  href="<c:url value="/businessapp/service/${service.id}/offer/update/${currentOffer.id}" /> ">
+                                <button class="functionalButton">
+                                    Edytuj
+                                </button>
+                            </a>
+                            <a class="right" href="<c:url value="/businessapp/service/${service.id}/offer/delete/confirm/${currentOffer.id}" /> ">
+                                <button class="functionalButton">
+                                    Usuń
+                                </button>
+                            </a>
                             <hr/>
                         </c:forEach>
                     </c:otherwise>
                 </c:choose>
 
-                <span class="insideTopic">Zakończone</span>
+                <span class="insideTopicPast">Zakończone</span>
                 <c:choose>
                     <c:when test="${empty pastOffers}">
                         <span class="empty">Brak</span>
@@ -317,11 +353,21 @@
                     <c:otherwise>
                         <hr/>
                         <c:forEach items="${pastOffers}" var="pastOffer">
-                            <div class="itemBody">
+                            <div class="itemBodyPast">
                                 <span class="contentTopic">${pastOffer.name}</span>
                                 <span class="contentInfo">${pastOffer.starts} - ${pastOffer.ends}</span>
                                 <span class="content">${pastOffer.description}</span>
                             </div>
+                            <a  href="<c:url value="/businessapp/service/${service.id}/offer/update/${pastOffer.id}" /> ">
+                                <button class="functionalButton">
+                                    Edytuj
+                                </button>
+                            </a>
+                            <a class="right" href="<c:url value="/businessapp/service/${service.id}/offer/delete/confirm/${pastOffer.id}" /> ">
+                                <button class="functionalButton">
+                                    Usuń
+                                </button>
+                            </a>
                             <hr/>
                         </c:forEach>
                     </c:otherwise>

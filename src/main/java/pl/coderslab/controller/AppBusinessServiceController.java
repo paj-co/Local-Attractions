@@ -6,17 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.entity.Business;
-import pl.coderslab.entity.Category;
-import pl.coderslab.entity.NewsFeed;
-import pl.coderslab.entity.Service;
+import pl.coderslab.entity.*;
 import pl.coderslab.model.ServiceCategories;
 import pl.coderslab.repository.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,9 +66,9 @@ public class AppBusinessServiceController {
             model.addAttribute("futureNewsFeeds", newsFeedRepository.findFutureNewsFeedByServiceId(serviceId, LocalDate.now()));
             model.addAttribute("currentNewsFeeds", newsFeedRepository.findCurrentNewsFeedByServiceId(serviceId, LocalDate.now()));
             model.addAttribute("pastNewsFeeds", newsFeedRepository.findPastNewsFeedByServiceId(serviceId, LocalDate.now()));
-            model.addAttribute("futureOffers", offerRepository.findFutureOfferByServiceId(serviceId, LocalDateTime.now()));
-            model.addAttribute("currentOffers", offerRepository.findCurrentOfferByServiceId(serviceId, LocalDateTime.now()));
-            model.addAttribute("pastOffers", offerRepository.findPastOfferByServiceId(serviceId, LocalDateTime.now()));
+            model.addAttribute("futureOffers", offerRepository.findFutureOfferByServiceId(serviceId, LocalDate.now()));
+            model.addAttribute("currentOffers", offerRepository.findCurrentOfferByServiceId(serviceId, LocalDate.now()));
+            model.addAttribute("pastOffers", offerRepository.findPastOfferByServiceId(serviceId, LocalDate.now()));
             model.addAttribute("tags", tagRepository.findTagsByServiceId(serviceId));
             return "app/business/businessServiceDetails";
         }
@@ -111,7 +107,7 @@ public class AppBusinessServiceController {
                 return "redirect:/businessapp/dashboard/";
             }
             model.addAttribute("serviceToDelete", service.get());
-            return "app/business/businessConfirmServiceDelete";
+            return "app/business/businessServiceConfirmDelete";
         }
         return "redirect:/businessapp/dashboard/";
     }
@@ -147,7 +143,7 @@ public class AppBusinessServiceController {
 
             model.addAttribute("mainCategories", mainCategoryRepository.findMainCategoriesByOrderByNameAsc());
             model.addAttribute("serviceCategories", serviceCategoriesModel);
-            return "app/business/businessAddCategories";
+            return "app/business/businessCategoriesAdd";
         }
         return "redirect:/businessapp/dashboard/";
     }
@@ -175,7 +171,7 @@ public class AppBusinessServiceController {
         return "redirect:/businessapp/dashboard/";
     }
 
-    @GetMapping("/{serviceId}/news")
+    @GetMapping("/{serviceId}/news/add")
     public String addNewsToService(@PathVariable long serviceId, Model model, HttpSession sess){
         Optional<Service> service = serviceRepository.findById(serviceId);
         if(service.isPresent()) {
@@ -184,23 +180,177 @@ public class AppBusinessServiceController {
             }
             model.addAttribute("newsFeed", new NewsFeed());
             model.addAttribute("serviceId", service.get().getId());
-            return "app/business/businessAddNews";
+            return "app/business/businessNewsAdd";
         }
         return "redirect:/businessapp/dashboard/";
     }
 
-    @PostMapping("/{serviceId}/news")
-    public String addNewsToService(@PathVariable long serviceId, @ModelAttribute @Valid NewsFeed newsFeed, BindingResult bindingResult){
+    @PostMapping("/{serviceId}/news/add")
+    public String addNewsToService(@PathVariable long serviceId, @ModelAttribute @Valid NewsFeed newsFeed, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()) {
-            return "app/business/businessAddNews";
+            return "app/business/businessNewsAdd";
         }
         Optional<Service> service = serviceRepository.findById(serviceId);
         if(service.isPresent()) {
+            if(newsFeed.getStarts().isAfter(newsFeed.getEnds())) {
+                model.addAttribute("dateError", "Data początkowa musi być mniejsza bądź równa dacie zakończenia");
+                return "app/business/businessNewsAdd";
+            }
             newsFeedRepository.save(newsFeed);
             return "redirect:/businessapp/service/details/" + service.get().getId();
         }
         return "redirect:/businessapp/dashboard/";
     }
 
+    @GetMapping("/{serviceId}/news/update/{newsId}")
+    public String updateServiceNews(@PathVariable long serviceId, @PathVariable long newsId, Model model, HttpSession sess){
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            Optional<NewsFeed> newsFeed = newsFeedRepository.findById(newsId);
+            if(newsFeed.isPresent()) {
+                model.addAttribute("newsFeed", newsFeed.get());
+                return "app/business/businessNewsUpdate";
+            }
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @PostMapping("/{serviceId}/news/update/{newsId}")
+    public String updateServiceNews(@PathVariable long serviceId, @ModelAttribute @Valid NewsFeed newsFeed, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()) {
+            return "app/business/businessNewsUpdate";
+        }
+        if(newsFeed.getStarts().isAfter(newsFeed.getEnds())) {
+            model.addAttribute("dateError", "Data początkowa musi być mniejsza bądź równa dacie zakończenia");
+            return "app/business/businessNewsUpdate";
+        }
+        newsFeedRepository.save(newsFeed);
+        return "redirect:/businessapp/service/details/" + serviceId;
+    }
+
+    @GetMapping("/{serviceId}/news/delete/confirm/{newsId}")
+    public String confirmDeleteServiceNews(@PathVariable long serviceId, @PathVariable long newsId, Model model, HttpSession sess){
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            Optional<NewsFeed> newsFeed = newsFeedRepository.findById(newsId);
+            if(newsFeed.isPresent()) {
+                model.addAttribute("newsFeed", newsFeed.get());
+                model.addAttribute("serviceId", service.get().getId());
+                return "app/business/businessNewsDeleteConfirm";
+            }
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @GetMapping("/{serviceId}/news/delete/{newsId}")
+    public String deleteServiceNews(@PathVariable long serviceId, @PathVariable long newsId, HttpSession sess){
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            Optional<NewsFeed> newsFeed = newsFeedRepository.findById(newsId);
+            newsFeed.ifPresent(feed -> newsFeedRepository.delete(feed));
+            return "redirect:/businessapp/service/details/" + service.get().getId();
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @GetMapping("/{serviceId}/offer/add")
+    public String addOfferToService(@PathVariable long serviceId, Model model, HttpSession sess){
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            model.addAttribute("offer", new Offer());
+            model.addAttribute("serviceId", service.get().getId());
+            return "app/business/businessOfferAdd";
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @PostMapping("/{serviceId}/offer/add")
+    public String addOfferToService(@PathVariable long serviceId, @ModelAttribute @Valid Offer offer, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()) {
+            return "app/business/businessOfferAdd";
+        }
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if(offer.getStarts().isAfter(offer.getEnds())) {
+                model.addAttribute("dateError", "Data początkowa musi być mniejsza bądź równa dacie zakończenia");
+                return "app/business/businessOfferAdd";
+            }
+            offerRepository.save(offer);
+            return "redirect:/businessapp/service/details/" + service.get().getId();
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @GetMapping("/{serviceId}/offer/update/{offerId}")
+    public String updateServiceOffer(@PathVariable long serviceId, @PathVariable long offerId, Model model, HttpSession sess){
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            Optional<Offer> offer = offerRepository.findById(offerId);
+            if(offer.isPresent()) {
+                model.addAttribute("offer", offer.get());
+                return "app/business/businessOfferUpdate";
+            }
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @PostMapping("/{serviceId}/offer/update/{offerId}")
+    public String updateServiceOffer(@PathVariable long serviceId, @ModelAttribute @Valid Offer offer, BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()) {
+            return "app/business/businessOfferUpdate";
+        }
+        if(offer.getStarts().isAfter(offer.getEnds())) {
+            model.addAttribute("dateError", "Data początkowa musi być mniejsza bądź równa dacie zakończenia");
+            return "app/business/businessOfferUpdate";
+        }
+        offerRepository.save(offer);
+        return "redirect:/businessapp/service/details/" + serviceId;
+    }
+
+    @GetMapping("/{serviceId}/offer/delete/confirm/{offerId}")
+    public String confirmDeleteServiceOffer(@PathVariable long serviceId, @PathVariable long offerId, Model model, HttpSession sess){
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            Optional<Offer> offer = offerRepository.findById(offerId);
+            if(offer.isPresent()) {
+                model.addAttribute("offer", offer.get());
+                model.addAttribute("serviceId", service.get().getId());
+                return "app/business/businessOfferDeleteConfirm";
+            }
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @GetMapping("/{serviceId}/offer/delete/{offerId}")
+    public String deleteServiceOffer(@PathVariable long serviceId, @PathVariable long offerId, HttpSession sess){
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            Optional<Offer> offer = offerRepository.findById(offerId);
+            offer.ifPresent(feed -> offerRepository.delete(feed));
+            return "redirect:/businessapp/service/details/" + service.get().getId();
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
 
 }

@@ -45,9 +45,6 @@ public class AuthenticationController {
         User user = authenticationService.authenticateUser(userLogin.getEmail(), userLogin.getPassword());
         if (user == null) {
             model.addAttribute("passwordError", "Podane hasło nie jest poprawne");
-            UserLogin passwordErrorViewMode = new UserLogin();
-            passwordErrorViewMode.setEmail(userLogin.getEmail());
-            model.addAttribute("viewMode", passwordErrorViewMode);
             return "authentication/userLogin";
         }
         model.addAttribute("loggedUser", user);
@@ -71,9 +68,6 @@ public class AuthenticationController {
         Business business = authenticationService.authenticateBusiness(businessLogin.getEmail(), businessLogin.getPassword());
         if (business == null) {
             model.addAttribute("passwordError", "Podane hasło nie jest poprawne");
-            BusinessLogin passwordErrorViewMode = new BusinessLogin();
-            passwordErrorViewMode.setEmail(businessLogin.getEmail());
-            model.addAttribute("businessLogin", passwordErrorViewMode);
             return "authentication/businessLogin";
         }
         model.addAttribute("loggedBusiness", business);

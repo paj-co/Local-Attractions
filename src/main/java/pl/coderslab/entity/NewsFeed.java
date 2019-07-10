@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "news_feed")
@@ -21,7 +20,7 @@ public class NewsFeed {
     @Size(min = 10, max = 400)
     private String description;
 
-    @NotNull
+    @NotNull()
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate starts;
     @NotNull
