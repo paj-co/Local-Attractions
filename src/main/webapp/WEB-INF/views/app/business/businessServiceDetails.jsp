@@ -35,17 +35,22 @@
                 <div><span class="topic">Krótki opis: </span><span class="content">${service.description}</span></div>
                 <div><span class="topic">Informacje (dokładny opis usługi): </span><span class="content">${service.informations}</span></div>
 
-                <div><span class="topic">Adres: </span>
-                    <div><span class="topic">Ulica: </span><span class="content">${service.street}</span></div>
-                    <div><span class="topic">Nr domu: </span><span class="content">${service.houseNumber}</span></div>
-                    <div><span class="topic">Nr lokalu: </span><span class="content">${service.apartmentNumber}</span></div>
+                <span class="topic">Adres: </span>
+                <div class="padding20">
+
+                    <div><span class="insideTopic">Ulica: </span><span class="content">${service.street}</span></div>
+                    <div><span class="insideTopic">Nr domu: </span><span class="content">${service.houseNumber}</span></div>
+                    <div><span class="insideTopic">Nr lokalu: </span><span class="content">${service.apartmentNumber}</span></div>
+                    <div><span class="insideTopic">Miejscowość: </span><span class="content">${service.locality}</span></div>
+                    
+                    <div><span class="insideTopic">Gmina: </span><span class="content">${service.commune}</span></div>
+                    <div><span class="insideTopic">Powiat: </span><span class="content">${service.district}</span></div>
+                    <div><span class="insideTopic">Wojewódźtwo: </span><span class="content">${service.province}</span></div>
+
+                    <div><span class="insideTopic">Kod pocztowy: </span><span class="content">${service.zipCode}</span></div>
                 </div>
 
-                <div><span class="topic">Wojewódźtwo: </span><span class="content">${service.province}</span></div>
-                <div><span class="topic">Powiat: </span><span class="content">${service.district}</span></div>
-                <div><span class="topic">Gmina: </span><span class="content">${service.commune}</span></div>
-                <div><span class="topic">Miejscowość: </span><span class="content">${service.locality}</span></div>
-                <div><span class="topic">Kod pocztowy: </span><span class="content">${service.zipCode}</span></div>
+
 
                 <div><span class="topic">E-mail usługi: </span><span class="content">${service.email}</span></div>
                 <div><span class="topic">Nr telefonu: </span><span class="content">${service.phone}</span></div>

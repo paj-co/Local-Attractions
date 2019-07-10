@@ -11,7 +11,9 @@
         <%@include file="/WEB-INF/views/header.jsp"%>
 
         <div id="main">
-            <h1>Witaj na naszej stronie głównej</h1>
+            <h1>Witaj na Lokalnych Atrakcjach!</h1>
+            <p>Jeśli masz już konto, zaloguj się!</p>
+            <p>Jeśli jakimś cudem nie założyłeś jeszcze konta, zarejestruj się!</p>
         </div>
 
     </div>

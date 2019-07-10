@@ -10,13 +10,13 @@
 
 <div class="center">
     <div class="loginBlock">
-        <h4>Czy na pewno chcesz skasować wydarznie ${offer.name}?</h4>
-        <a class="right" href="<c:url value="/businessapp/service/details/${serviceId}" /> ">
+        <h4>Czy na pewno chcesz skasować wydarznie "${offer.name}"?</h4>
+        <a href="<c:url value="/businessapp/service/details/${serviceId}" /> ">
             <button>
                 Anuluj
             </button>
         </a>
-        <a class="right" href="<c:url value="/businessapp/service/${serviceId}/offer/delete/${offer.id}" /> ">
+        <a href="<c:url value="/businessapp/service/${serviceId}/offer/delete/${offer.id}" /> ">
             <button>
                 Tak, chcę usunąć
             </button>

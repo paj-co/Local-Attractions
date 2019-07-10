@@ -7,6 +7,7 @@
     margin: 0 auto;
     padding: 10px;
     min-height: 300px;
+    text-align: center;
 }
 #header{
     width: 100%;
@@ -54,6 +55,12 @@
 .padding{
     padding: 0 5px 0;
 }
+.padding20{
+    padding: 0 20px 0;
+}
+.right{
+    float: right;
+}
 div.error{
     color: red;
     background-color: #e4bdcb;
@@ -81,6 +88,9 @@ span.error{
 }
 .loginBlock a{
     text-decoration: none;
+}
+.insideTopic{
+    color: #a62822;
 }
 /*add new service----------------------------------------*/
 #addService{
@@ -122,7 +132,7 @@ body {
 #serviceDetails{
     font-size: 0.9em;
 }
-#serviceDetails .topic{
+.topic{
     color: darkblue;
 }
 #serviceDetails .insideTopicFuture{
@@ -177,7 +187,7 @@ body {
     font-weight: bold;
 }
 #serviceDetails #category, #tag{
-    width: 20%;
+    width: max-content;
     display: inline-block;
     vertical-align: top;
     font-size: 0.9em;
@@ -230,11 +240,19 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 30px rgba(16,14,23,.25);
 }
-#serviceDetails hr {
+hr {
     display: block;
     height: 1px;
     border: 0;
     border-top: 1px solid #aaaaaa;
+    margin: 0.5em 0;
+    padding: 0;
+}
+hr.thick{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #828282;
     margin: 0.5em 0;
     padding: 0;
 }
@@ -277,6 +295,19 @@ body {
     box-shadow: 0 0 30px rgba(16,14,23,.5);
     border: 2px solid #326a67;
     padding: 10px;
+}
+#mainDashboard .inline{
+    display: inline-block;
+    vertical-align: top;
+}
+#mainDashboard #info{
+    margin-right: 10px;
+}
+.alignRight{
+    text-align: right;
+}
+.block{
+    display: block;
 }
 /*Business Service Categories--------------------------------------------*/
 div#serviceCategories {
