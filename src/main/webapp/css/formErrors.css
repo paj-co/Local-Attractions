@@ -8,6 +8,8 @@
     padding: 10px;
     min-height: 300px;
 }
+
+/*TODO w css preferowane jest chyba nadawanie styli przez klasy a nie idki - a przynajmniej w praktyce każdy stara się robić wszystko generyczne możliwe do reuzycia a id takie nie jest*/
 #header{
     width: 100%;
     height: 70px;

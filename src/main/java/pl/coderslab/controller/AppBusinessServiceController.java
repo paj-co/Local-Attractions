@@ -77,6 +77,31 @@ public class AppBusinessServiceController {
             return "app/business/businessServiceDetails";
         }
         return "redirect:/businessapp/dashboard/";
+
+        //TODO te sciezki fajnie byloby wrzucic do jednego wora / np. jakis enum:
+
+//            public enum Page {
+//
+//                BUSINESS_DASHBOARD("businessapp/dashboard/"),
+//                BUSINESS_SERVICE_DETAILS("app/business/businessServiceDetails"),
+//                BUSINESS_SERVICE_ADD("app/business/businessServiceAdd");
+//
+//
+//                private String path;
+//
+//                Page(String path) {
+//                    this.path = path;
+//                }
+//
+//                public String pathh() {
+//                    return path;
+//                }
+//
+//                public String redirect() {
+//                    return "redirect:" + path;
+//                }
+//
+//            }
     }
 
     @GetMapping("/update/{serviceId}")

@@ -70,6 +70,8 @@ public class AuthenticationController {
         }
         Business business = authenticationService.authenticateBusiness(businessLogin.getEmail(), businessLogin.getPassword());
         if (business == null) {
+            //TODO tutaj sprawdzasz czy hasło jest prawidłowe ale to czy email jest prawidłowy (istnieje) sprawdzasz przez adnotację - niespójne podejście
+            //TODO chyba lepiej żeby adnotacje były proste czyli ograniczały się do sprawdzania czy coś ma odpowiednią ilość znaków itp. a takie bardziej złożone walidacje typu sprawdzenie czy coś jest w bazie to już jawnie można wołać
             model.addAttribute("passwordError", "Podane hasło nie jest poprawne");
             BusinessLogin passwordErrorViewMode = new BusinessLogin();
             passwordErrorViewMode.setEmail(businessLogin.getEmail());

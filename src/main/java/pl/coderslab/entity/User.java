@@ -20,6 +20,7 @@ public class User {
     @Email
     //TODO create working annotation UniqueEmail
 //    @UniqueEmail
+    //TODO Odnośnie tego co tam nie działa z tym @Autowired w adnotacji to chodzi o to że raz ten Validator jest inicjalizowany przez Springa a raz przez Hibernate i to ten drugi nie ogarnia @Autowired i rzuca nullem - na stackoverflow widziałem wyjaśnienie tego i rozwiązanie
     @Column(unique = true)
     private String email;
 

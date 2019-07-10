@@ -12,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "businesses")
+//TODO żeby nie pisać tych setterów i getterów to można użyć https://projectlombok.org - wówczas adnotacja @Data generuje te metody a z pluginem w InteliJ działa super
 public class Business {
 
     @Id
@@ -22,6 +23,8 @@ public class Business {
     //TODO @UniqueEmail
 //    @UniqueEmail
     @Email
+    //TODO każda kolumna bazodanowa powinna mieć adnotację @Column z jej definicją - dzięki temu na bazie zostaną założone faktyczne ograniczenia
+    @Column(unique = true, nullable = false, length = 256)
     private String email;
 
     @NotBlank

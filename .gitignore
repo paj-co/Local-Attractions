@@ -1,0 +1,5 @@
+
+#TODO brakuje .gitignore
+target
+.idea
+*.iml

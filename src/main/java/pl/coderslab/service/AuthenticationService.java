@@ -35,6 +35,10 @@ public class AuthenticationService {
             }
         }
         return null;
+
+        //TODO powyzsze mozna uproscic do
+        User user = userRepository.findUserByEmail(email);
+        return user != null && BCrypt.checkpw(password, user.getPassword()) ? user : null;
     }
 
     public boolean checkIfBusinessEmailIsInDatabase(String email) {
@@ -43,6 +47,12 @@ public class AuthenticationService {
             return true;
         }
         return false;
+
+
+        //TODO powyzsze mozna uproscic do
+        return businessRepository.findBusinessByEmail(email) != null;
+
+        //TODO generalnie powinno się dążyć do jednego returna w metodzie - a przynajmniej tak zasłyszałem https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882
     }
 
     public Business authenticateBusiness(String email, String password) {

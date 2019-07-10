@@ -24,6 +24,7 @@ public class Service {
     private File mainPicture;
 
     //TODO make annotation -> with pl.coderslab.validation
+    //TODO dane adresowe mozna dac do osobnej tabeli a jak nie tabeli to przynajmniej obiektu i potem uzyc adnotacji @Embedded - przez co bedziesz mial obiekt Address w tej klasie ale w bazie to wciaz bedzie jedna tabela
     @ManyToOne
     @JoinColumn(name = "province_id")
     private Province province; //(in polish: województwo)
@@ -60,6 +61,7 @@ public class Service {
     @Size(max = 4000)
     private String informations;
 
+    //TODO godziny otwarcia w osobnej tabeli https://stackoverflow.com/questions/1036603/storing-business-hours-in-a-database
     @NotNull
     private LocalTime openHourMonday;
     @NotNull

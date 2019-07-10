@@ -12,6 +12,9 @@
             <property name="javax.persistence.schema-generation.database.action" value="none"/>
 <!--            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
 <!--            <property name="javax.persistence.sql-load-script-source" value="META-INF/sql/data.sql" />-->
+<!--            TODO Musiałem powalczyć z uruchomieniem bo nie chciał mi założyć tabel w bazie ale znalazłem ten fragment:-->
+<!--            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
+<!--            generalnie w takich już aplikacjach produkcyjnych to muszą być skrypty migracyjne które migrują pomiędzy wersjami bo nie można sobie po prostu dropować wszystkiego :)-->
 
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
