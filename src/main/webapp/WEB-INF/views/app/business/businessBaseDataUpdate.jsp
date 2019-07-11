@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<%@include file="/WEB-INF/views/header.jsp"%>
+<%@include file="/WEB-INF/views/app/businessHeader.jsp"%>
 
 <div class="center">
     <div class="registerBlock">

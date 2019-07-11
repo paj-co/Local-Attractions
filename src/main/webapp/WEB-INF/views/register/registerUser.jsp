@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Rejstracja użytkownika | Lokalne Atrakcje</title>
     <link href='<c:url value="/css/formErrors.css"/>' rel="stylesheet">
 </head>
 <body>

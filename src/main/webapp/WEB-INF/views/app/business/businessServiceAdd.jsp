@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<%@include file="/WEB-INF/views/app/businessHeader.jsp"%>
+
 <div id="addService">
 
     <h2>Utwórz nową usługę:</h2>
@@ -267,6 +269,9 @@
         </table>
 
         <input type="submit" value="Zapisz">
+        <a href="<c:url value="/businessapp/dashboard/" />">
+            <button type="button">Anuluj</button>
+        </a>
     </form:form>
 
 </div>
