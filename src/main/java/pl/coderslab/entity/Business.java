@@ -3,6 +3,8 @@ package pl.coderslab.entity;
 
 import org.hibernate.validator.constraints.pl.NIP;
 import org.hibernate.validator.constraints.pl.REGON;
+import pl.coderslab.validation.ValidationGroupBusinessChangeData;
+import pl.coderslab.validation.ValidationGroupBusinessRegister;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -18,27 +20,28 @@ public class Business {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    //TODO @UniqueEmail
-//    @UniqueEmail
-    @Email
+    @NotBlank(groups = {ValidationGroupBusinessChangeData.class, ValidationGroupBusinessRegister.class})
+    @Email(groups = {ValidationGroupBusinessChangeData.class, ValidationGroupBusinessRegister.class})
     private String email;
 
-    @NotBlank
-
-    //TODO change to 8, 1 is for testing
-    @Size(min = 1)
-    //TODO @Anotation: password mast contain aat least 1 big, 1 small letter, 1 digit, 1 special character
+    @NotBlank(groups = ValidationGroupBusinessRegister.class)
+    //TODO change to min = 8, 1 is for testing
+    @Size(min = 1, max = 15, groups = ValidationGroupBusinessRegister.class)
+    //TODO @Anotation: password mast contain at least 1 big, 1 small letter, 1 digit, 1 special character
     private String password;
 
-    @NotBlank
+    @NotBlank(groups = ValidationGroupBusinessRegister.class)
+    @Transient
+    private String repeatPassword;
+
+    @NotBlank(groups = {ValidationGroupBusinessChangeData.class, ValidationGroupBusinessRegister.class})
     private String name;
 
     //TODO validate NIP i REGON
 
-    @NIP
+    @NIP(groups = {ValidationGroupBusinessChangeData.class, ValidationGroupBusinessRegister.class})
     private String nip;
-    @REGON
+    @REGON(groups = {ValidationGroupBusinessChangeData.class, ValidationGroupBusinessRegister.class})
     private String regon;
 
     @OneToMany(mappedBy = "business")
@@ -66,6 +69,14 @@ public class Business {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRepeatPassword() {
+        return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 
     public String getName() {

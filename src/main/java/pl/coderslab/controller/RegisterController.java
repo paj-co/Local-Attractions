@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import pl.coderslab.entity.User;
 import pl.coderslab.repository.BusinessRepository;
 import pl.coderslab.repository.UserRepository;
 import pl.coderslab.service.AuthenticationService;
+import pl.coderslab.validation.ValidationGroupBusinessRegister;
 
 import javax.validation.Valid;
 
@@ -70,7 +72,7 @@ public class RegisterController {
     }
 
     @PostMapping("/business")
-    public String registerBusiness(@Valid Business business, BindingResult bindingResult, Model model) {
+    public String registerBusiness(@Validated({ValidationGroupBusinessRegister.class}) Business business, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
             if(business.getEmail() != null) {
                 if(authenticationService.checkIfBusinessEmailIsInDatabase(business.getEmail())) {
@@ -82,6 +84,10 @@ public class RegisterController {
 
         if(authenticationService.checkIfBusinessEmailIsInDatabase(business.getEmail())) {
             model.addAttribute("emailError", "Na ten adres e-mail założono już konto");
+            return "register/registerBusiness";
+        }
+        if(!business.getPassword().equals(business.getRepeatPassword())) {
+            model.addAttribute("reEnterPasswordError", "Hasła nie są tożsame");
             return "register/registerBusiness";
         }
 

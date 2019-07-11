@@ -25,10 +25,10 @@
                     </span>
                 </div>
                 <div class="right">
-                    <a class="block alignRight" href="<c:url value="/businessapp/service/add" />">
+                    <a class="block alignRight" href="<c:url value="/businessapp/dashboard/data/change" />">
                     <button>Zmień podstawowe dane</button>
                     </a>
-                    <a class="block alignRight" href="<c:url value="/businessapp/service/add" />">
+                    <a class="block alignRight" href="<c:url value="/businessapp/dashboard/password/change" />">
                         <button>Zmień hasło</button>
                     </a>
                 </div>
@@ -45,7 +45,7 @@
 
             <c:choose>
                 <c:when test="${empty services}">
-                    <p>Nie masz jeszcze dodanych rządnych usług!</p>
+                    <p>Nie masz jeszcze dodanych żadnych usług!</p>
                 </c:when>
                 <c:otherwise>
                     <hr class=""/>

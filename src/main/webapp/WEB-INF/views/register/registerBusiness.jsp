@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/views/header.jsp"%>
 
     <div class="center">
-        <div class="loginBlock">
+        <div class="registerBlock">
 
             <h3>Zarejestruj swoją firmę:</h3>
 
@@ -54,7 +54,17 @@
                         <form:errors path="password" cssClass="error" />
                     </div>
                 </div>
-                <input type="submit" value="Zaloguj sie">
+                <div>
+                    Powtórz hasło:
+                    <form:password path="repeatPassword"/>
+                    <div class="error">
+                        <form:errors path="repeatPassword" cssClass="error" />
+                        <c:if test="${not empty reEnterPasswordError}">
+                            <span class="error">${reEnterPasswordError}</span>
+                        </c:if>
+                    </div>
+                </div>
+                <input type="submit" value="Zarejestruj się">
             </form:form>
 
         </div>
