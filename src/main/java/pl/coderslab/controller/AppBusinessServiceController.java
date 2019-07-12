@@ -36,6 +36,34 @@ public class AppBusinessServiceController {
     private TagRepository tagRepository;
     @Autowired
     private MainCategoryRepository mainCategoryRepository;
+    @Autowired
+    private ProvinceRepository provinceRepository;
+    @Autowired
+    private DistrictRepository districtRepository;
+    @Autowired
+    private CommuneRepository communeRepository;
+    @Autowired
+    private LocalityRepository localityRepository;
+
+    @ModelAttribute("provinces")
+    public List<Province> provinceList() {
+        return provinceRepository.findAll();
+    }
+
+    @ModelAttribute("districts")
+    public List<District> districtList() {
+        return districtRepository.findAll();
+    }
+
+    @ModelAttribute("communes")
+    public List<Commune> communeList() {
+        return communeRepository.findAll();
+    }
+
+    @ModelAttribute("localities")
+    public List<Locality> localityList() {
+        return localityRepository.findAll();
+    }
 
     //TODO move to addingnewcategory to a service view
     @ModelAttribute("categories")

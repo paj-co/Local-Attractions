@@ -57,7 +57,9 @@ public class Service {
     @Size(max = 4000)
     private String informations;
 
-//    @NotNull
+    private String website;
+
+    //@NotNull
     private LocalTime openHourMonday;
     //@NotNull
     private LocalTime closeHourMonday;
@@ -235,6 +237,14 @@ public class Service {
 
     public void setInformations(String informations) {
         this.informations = informations;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
     }
 
     public LocalTime getOpenHourMonday() {

@@ -16,6 +16,16 @@ public class Locality {
     @JoinColumn(name = "commune_id")
     private Commune commune;
 
+    @ManyToOne
+    @JoinColumn(name = "province_id")
+    private Province province;
+
+    @ManyToOne
+    @JoinColumn(name = "district_id")
+    private District district;
+
+
+
     public Long getId() {
         return id;
     }
@@ -38,5 +48,21 @@ public class Locality {
 
     public void setCommune(Commune commune) {
         this.commune = commune;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+    public District getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(District district) {
+        this.district = district;
     }
 }

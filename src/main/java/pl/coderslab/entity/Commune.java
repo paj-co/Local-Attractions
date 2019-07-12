@@ -16,6 +16,10 @@ public class Commune {
     @JoinColumn(name = "district_id")
     private District district;
 
+    @ManyToOne
+    @JoinColumn(name = "province_id")
+    private Province province;
+
     public Long getId() {
         return id;
     }
@@ -39,4 +43,14 @@ public class Commune {
     public void setDistrict(District district) {
         this.district = district;
     }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+
 }

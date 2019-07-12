@@ -16,6 +16,7 @@ public class District {
     @JoinColumn(name = "province_id")
     private Province province;
 
+
     public Long getId() {
         return id;
     }

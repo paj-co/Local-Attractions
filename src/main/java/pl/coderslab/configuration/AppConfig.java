@@ -16,7 +16,9 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import pl.coderslab.converter.CategoryConverter;
+import pl.coderslab.converter.*;
+import pl.coderslab.entity.Commune;
+import pl.coderslab.repository.LocalityRepository;
 
 
 import javax.persistence.EntityManagerFactory;
@@ -66,12 +68,38 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(getCategoryConverter());
+        registry.addConverter(getProvinceConverter());
+        registry.addConverter(getDistrictConverter());
+        registry.addConverter(getCommuneConverter());
+        registry.addConverter(getLocalityConverter());
     }
 
     @Bean
-    public CategoryConverter getCategoryConverter() {
+    public CategoryConverter getCategoryConverter(){
         return new CategoryConverter();
     }
+
+    @Bean
+    public ProvinceConverter getProvinceConverter() {
+        return new ProvinceConverter();
+    }
+
+    @Bean
+    public DistrictConverter getDistrictConverter() {
+        return new DistrictConverter();
+    }
+
+    @Bean
+    public CommuneConverter getCommuneConverter() {
+        return new CommuneConverter();
+    }
+
+    @Bean
+    public LocalityConverter getLocalityConverter() {
+        return new LocalityConverter();
+    }
+
+
 
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver multipartResolver() {

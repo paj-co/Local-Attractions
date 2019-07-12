@@ -31,6 +31,13 @@
                 <form:errors path="description" cssClass="error" />
             </div>
         </div>
+        <div>
+            Strona internetowa:
+            <form:input path="website"/>
+            <div class="error">
+                <form:errors path="website" cssClass="error" />
+            </div>
+        </div>
         <div class="inline">
             Ulica:
             <form:input path="street"/>

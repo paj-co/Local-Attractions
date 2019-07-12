@@ -39,6 +39,12 @@
                 <h3 class="inline">Główne informacje</h3>
 
                 <div><span class="topic">Nazwa: </span><span class="content">${service.name}</span></div>
+                <div>
+                    <span class="topic">Strona internetowa: </span>
+                    <span class="content">
+                        <a target="_blank" href="<c:url value="${service.website}" /> ">${service.website}</a>
+                     </span>
+                </div>
                 <div><span class="topic">Krótki opis: </span><span class="content">${service.description}</span></div>
                 <div><span class="topic">Informacje (dokładny opis usługi): </span><span class="content">${service.informations}</span></div>
 
@@ -48,11 +54,11 @@
                     <div><span class="insideTopic">Ulica: </span><span class="content">${service.street}</span></div>
                     <div><span class="insideTopic">Nr domu: </span><span class="content">${service.houseNumber}</span></div>
                     <div><span class="insideTopic">Nr lokalu: </span><span class="content">${service.apartmentNumber}</span></div>
-                    <div><span class="insideTopic">Miejscowość: </span><span class="content">${service.locality}</span></div>
+                    <div><span class="insideTopic">Miejscowość: </span><span class="content">${service.locality.name}</span></div>
                     
-                    <div><span class="insideTopic">Gmina: </span><span class="content">${service.commune}</span></div>
-                    <div><span class="insideTopic">Powiat: </span><span class="content">${service.district}</span></div>
-                    <div><span class="insideTopic">Wojewódźtwo: </span><span class="content">${service.province}</span></div>
+                    <div><span class="insideTopic">Gmina: </span><span class="content">${service.commune.name}</span></div>
+                    <div><span class="insideTopic">Powiat: </span><span class="content">${service.district.name}</span></div>
+                    <div><span class="insideTopic">Wojewódźtwo: </span><span class="content">${service.province.name}</span></div>
 
                     <div><span class="insideTopic">Kod pocztowy: </span><span class="content">${service.zipCode}</span></div>
                 </div>
