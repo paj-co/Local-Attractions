@@ -2,9 +2,7 @@ package pl.coderslab.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalTime;
-import java.util.Base64;
 import java.util.List;
 
 @Entity
@@ -21,7 +19,7 @@ public class Service {
     private String description;
 
     @Column(length = 1500000)
-    private byte[] mainImage;
+    private String mainImage;
 
     //TODO make annotation -> with pl.coderslab.validation
     @ManyToOne
@@ -59,33 +57,33 @@ public class Service {
     @Size(max = 4000)
     private String informations;
 
-    @NotNull
+//    @NotNull
     private LocalTime openHourMonday;
-    @NotNull
+    //@NotNull
     private LocalTime closeHourMonday;
-    @NotNull
+    //@NotNull
     private LocalTime openHourTuesday;
-    @NotNull
+    //@NotNull
     private LocalTime closeHourTuesday;
-    @NotNull
+    //@NotNull
     private LocalTime openHourWednesday;
-    @NotNull
+    //@NotNull
     private LocalTime closeHourWednesday;
-    @NotNull
+    //@NotNull
     private LocalTime openHourThursday;
-    @NotNull
+    //@NotNull
     private LocalTime closeHourThursday;
-    @NotNull
+    //@NotNull
     private LocalTime openHourFriday;
-    @NotNull
+    //@NotNull
     private LocalTime closeHourFriday;
-    @NotNull
+    //@NotNull
     private LocalTime openHourSaturday;
-    @NotNull
+    //@NotNull
     private LocalTime closeHourSaturday;
-    @NotNull
+    //@NotNull
     private LocalTime openHourSunday;
-    @NotNull
+    //@NotNull
     private LocalTime closeHourSunday;
 
     @ManyToMany(cascade = {
@@ -143,19 +141,11 @@ public class Service {
         this.description = description;
     }
 
-    public byte[] getMainImageByte() {
+    public String getMainImage() {
         return mainImage;
     }
 
-    public String getMainImage(){
-        if (mainImage== null || mainImage.length == 0) {
-            return null;
-        }
-        byte[] encodeBase64Bytes =  Base64.getEncoder().encode(mainImage);
-        return new String(encodeBase64Bytes, StandardCharsets.UTF_8);
-    }
-
-    public void setMainImage(byte[] mainImage) {
+    public void setMainImage(String mainImage) {
         this.mainImage = mainImage;
     }
 

@@ -56,9 +56,9 @@
                                     <c:when test="${empty service.mainImage}" >
                                         <img src="<c:url value="/image/picture_800x200.jpg" /> "/>
                                     </c:when>
-                                    <c:when test="${not empty service.mainImage}">
+                                    <c:otherwise>
                                         <img src="data:image/jpeg;base64,${service.mainImage}"/>
-                                    </c:when>
+                                    </c:otherwise>
                                 </c:choose>
 
                             </div>

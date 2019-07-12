@@ -11,7 +11,7 @@
     <div class="center">
         <div class="loginBlock">
             <h4>Czy na pewno chcesz skasować usługę ${serviceToDelete.name}?</h4>
-            <a class="right" href="<c:url value="/businessapp/service/details/${serviceToDelete.id}" /> ">
+            <a href="<c:url value="/businessapp/service/details/${serviceToDelete.id}" /> ">
                 <button>
                     Anuluj
                 </button>

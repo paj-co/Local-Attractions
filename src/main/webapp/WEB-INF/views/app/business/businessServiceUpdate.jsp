@@ -118,6 +118,7 @@
                 <form:errors path="informations" cssClass="error" />
             </div>
         </div>
+        <form:hidden path="mainImage" />
         <div>
             Główne zdjęcie:
             <input type="file" name="file">

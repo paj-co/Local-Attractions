@@ -14,7 +14,9 @@ import pl.coderslab.repository.*;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,16 +50,19 @@ public class AppBusinessServiceController {
     }
 
     @PostMapping("/add")
-    public String addService(@ModelAttribute @Validated Service service, BindingResult result, @RequestParam("file") MultipartFile multipartFile) {
+    public String addService(@ModelAttribute @Validated Service service, BindingResult result, @RequestParam(value = "file", required = false) MultipartFile multipartFile) {
         if(result.hasErrors()) {
             return "app/business/businessServiceAdd";
         }
 
-        try {
-            byte[] bytes = multipartFile.getBytes();
-            service.setMainImage(bytes);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(multipartFile != null) {
+            try {
+                byte[] bytes = multipartFile.getBytes();
+                byte[] encodeBase64Bytes = Base64.getEncoder().encode(bytes);
+                service.setMainImage(new String(encodeBase64Bytes, StandardCharsets.UTF_8));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         Service savedService = serviceRepository.save(service);
@@ -101,15 +106,17 @@ public class AppBusinessServiceController {
     }
 
     @PostMapping("/update/{serviceId}")
-    public String updateService(@ModelAttribute @Validated Service service, BindingResult result, Model model, @RequestParam("file") MultipartFile multipartFile) {
+    public String updateService(@ModelAttribute @Validated Service service, BindingResult result, Model model, @RequestParam(value = "file", required = false) MultipartFile multipartFile) {
         if(result.hasErrors()) {
             model.addAttribute("serviceId", service.getId());
             return "app/business/businessServiceUpdate";
         }
-
         try {
-            byte[] bytes = multipartFile.getBytes();
-            service.setMainImage(bytes);
+            if(multipartFile != null && multipartFile.getBytes().length > 0) {
+                byte[] bytes = multipartFile.getBytes();
+                byte[] encodeBase64Bytes = Base64.getEncoder().encode(bytes);
+                service.setMainImage(new String(encodeBase64Bytes, StandardCharsets.UTF_8));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
