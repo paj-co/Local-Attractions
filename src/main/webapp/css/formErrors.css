@@ -186,6 +186,7 @@ body {
 }
 #serviceDetails table{
     font-size: 0.9em;
+    font-size: 0.9em;
 }
 #serviceDetails table p{
     text-align: left;
@@ -313,6 +314,11 @@ hr.thick{
 }
 #mainDashboard #info{
     margin-right: 10px;
+}
+#mainDashboard .service .picture img{
+    max-height: 50px;
+    width: auto;
+    max-width: 400px;
 }
 .alignRight{
     text-align: right;

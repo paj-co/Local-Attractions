@@ -15,7 +15,7 @@
 
     <h2>Utwórz nową usługę:</h2>
 
-    <form:form method="post" modelAttribute="service">
+    <form:form method="post" modelAttribute="service" enctype="multipart/form-data">
         <form:hidden path="business.id" value="${loggedBusiness.id}" />
         <div>
             Nazwa usługi:
@@ -53,7 +53,6 @@
             </div>
         </div>
 
-        <%--TODO delete br tag       --%>
         <br>
 
         <div class="inline">
@@ -85,7 +84,6 @@
             </div>
         </div>
 
-        <%--TODO delete br tag       --%>
         <br>
 
         <div class="short">
@@ -119,7 +117,7 @@
         </div>
         <div>
             Główne zdjęcie:
-                <input type="file" name="mainPicture">
+                <input type="file" name="file">
                 <div class="error">
 
                 </div>

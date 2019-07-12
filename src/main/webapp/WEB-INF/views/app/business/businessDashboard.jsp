@@ -51,8 +51,21 @@
                     <hr class=""/>
                     <c:forEach items="${services}" var="service" >
                         <div class="service">
-                            <span>- ${service.name}</span>
-                            <a href="<c:url value="/businessapp/service/details/${service.id}" />">Szczegóły</a>
+                            <div class="picture inline">
+                                <c:choose>
+                                    <c:when test="${empty service.mainImage}" >
+                                        <img src="<c:url value="/image/picture_800x200.jpg" /> "/>
+                                    </c:when>
+                                    <c:when test="${not empty service.mainImage}">
+                                        <img src="data:image/jpeg;base64,${service.mainImage}"/>
+                                    </c:when>
+                                </c:choose>
+
+                            </div>
+                            <div class="inline">
+                                <span>- ${service.name}</span>
+                                <a href="<c:url value="/businessapp/service/details/${service.id}" />">Szczegóły</a>
+                            </div>
                         </div>
                         <hr />
                     </c:forEach>

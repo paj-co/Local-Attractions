@@ -6,12 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pl.coderslab.entity.*;
 import pl.coderslab.model.ServiceCategories;
 import pl.coderslab.repository.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -46,10 +48,18 @@ public class AppBusinessServiceController {
     }
 
     @PostMapping("/add")
-    public String addService(@ModelAttribute @Validated Service service, BindingResult result) {
+    public String addService(@ModelAttribute @Validated Service service, BindingResult result, @RequestParam("file") MultipartFile multipartFile) {
         if(result.hasErrors()) {
             return "app/business/businessServiceAdd";
         }
+
+        try {
+            byte[] bytes = multipartFile.getBytes();
+            service.setMainImage(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Service savedService = serviceRepository.save(service);
         return "redirect:/businessapp/service/details/" + savedService.getId();
     }
@@ -70,6 +80,7 @@ public class AppBusinessServiceController {
             model.addAttribute("currentOffers", offerRepository.findCurrentOfferByServiceId(serviceId, LocalDate.now()));
             model.addAttribute("pastOffers", offerRepository.findPastOfferByServiceId(serviceId, LocalDate.now()));
             model.addAttribute("tags", tagRepository.findTagsByServiceId(serviceId));
+
             return "app/business/businessServiceDetails";
         }
         return "redirect:/businessapp/dashboard/";
@@ -90,11 +101,19 @@ public class AppBusinessServiceController {
     }
 
     @PostMapping("/update/{serviceId}")
-    public String updateService(@ModelAttribute @Validated Service service, BindingResult result, Model model) {
+    public String updateService(@ModelAttribute @Validated Service service, BindingResult result, Model model, @RequestParam("file") MultipartFile multipartFile) {
         if(result.hasErrors()) {
             model.addAttribute("serviceId", service.getId());
             return "app/business/businessServiceUpdate";
         }
+
+        try {
+            byte[] bytes = multipartFile.getBytes();
+            service.setMainImage(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         serviceRepository.save(service);
         return "redirect:/businessapp/service/details/" + service.getId();
     }

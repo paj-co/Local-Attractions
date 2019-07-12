@@ -2,10 +2,10 @@ package pl.coderslab.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalTime;
+import java.util.Base64;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "services")
@@ -20,8 +20,8 @@ public class Service {
     @NotBlank
     private String description;
 
-//    //TODO is picture necessary
-    private File mainPicture;
+    @Column(length = 1500000)
+    private byte[] mainImage;
 
     //TODO make annotation -> with pl.coderslab.validation
     @ManyToOne
@@ -48,7 +48,6 @@ public class Service {
     private String zipCode;
 
     @NotBlank
-//    @UniqueEmail
     @Email
     private String email;
 
@@ -144,12 +143,20 @@ public class Service {
         this.description = description;
     }
 
-    public File getMainPicture() {
-        return mainPicture;
+    public byte[] getMainImageByte() {
+        return mainImage;
     }
 
-    public void setMainPicture(File mainPicture) {
-        this.mainPicture = mainPicture;
+    public String getMainImage(){
+        if (mainImage== null || mainImage.length == 0) {
+            return null;
+        }
+        byte[] encodeBase64Bytes =  Base64.getEncoder().encode(mainImage);
+        return new String(encodeBase64Bytes, StandardCharsets.UTF_8);
+    }
+
+    public void setMainImage(byte[] mainImage) {
+        this.mainImage = mainImage;
     }
 
     public Province getProvince() {
