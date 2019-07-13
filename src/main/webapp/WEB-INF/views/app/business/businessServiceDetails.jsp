@@ -188,8 +188,7 @@
                                 Zarządzaj kategoriami
                             </button>
                         </a>
-                        <%--TODO link--%>
-                        <a href="<c:url value="" /> ">
+                        <a href="<c:url value="/businessapp/service/${service.id}/tags" /> ">
                             <button>
                                 Zarządzaj tagami
                             </button>

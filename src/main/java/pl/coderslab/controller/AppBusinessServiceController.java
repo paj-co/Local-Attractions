@@ -47,22 +47,22 @@ public class AppBusinessServiceController {
 
     @ModelAttribute("provinces")
     public List<Province> provinceList() {
-        return provinceRepository.findAll();
+        return provinceRepository.findProvincesByOrderByNameAsc();
     }
 
     @ModelAttribute("districts")
     public List<District> districtList() {
-        return districtRepository.findAll();
+        return districtRepository.findDistrictsByOrderByNameAsc();
     }
 
     @ModelAttribute("communes")
     public List<Commune> communeList() {
-        return communeRepository.findAll();
+        return communeRepository.findCommunesByOrderByNameAsc();
     }
 
     @ModelAttribute("localities")
     public List<Locality> localityList() {
-        return localityRepository.findAll();
+        return localityRepository.findLocalitiesByOrderByNameAsc();
     }
 
     //TODO move to addingnewcategory to a service view
@@ -112,7 +112,7 @@ public class AppBusinessServiceController {
             model.addAttribute("futureOffers", offerRepository.findFutureOfferByServiceId(serviceId, LocalDate.now()));
             model.addAttribute("currentOffers", offerRepository.findCurrentOfferByServiceId(serviceId, LocalDate.now()));
             model.addAttribute("pastOffers", offerRepository.findPastOfferByServiceId(serviceId, LocalDate.now()));
-            model.addAttribute("tags", tagRepository.findTagsByServiceId(serviceId));
+            model.addAttribute("tags", tagRepository.findTagsByServiceIdOrderByNameAsc(serviceId));
 
             return "app/business/businessServiceDetails";
         }
@@ -149,7 +149,9 @@ public class AppBusinessServiceController {
             e.printStackTrace();
         }
 
+        service.setCategories(categoryRepository.findCategoriesByServiceId(service.getId()));
         serviceRepository.save(service);
+
         return "redirect:/businessapp/service/details/" + service.getId();
     }
 
@@ -403,6 +405,49 @@ public class AppBusinessServiceController {
             Optional<Offer> offer = offerRepository.findById(offerId);
             offer.ifPresent(feed -> offerRepository.delete(feed));
             return "redirect:/businessapp/service/details/" + service.get().getId();
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @GetMapping("/{serviceId}/tags")
+    public String addTagsToService(@PathVariable long serviceId, Model model, HttpSession sess){
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            List<Tag> serviceTagsList = tagRepository.findTagsByServiceIdOrderByNameAsc(service.get().getId());
+            Tag tag = new Tag();
+            model.addAttribute("serviceId", service.get().getId());
+            model.addAttribute("tag", tag);
+            model.addAttribute("tagList", serviceTagsList);
+            return "app/business/businessTagsAdd";
+        }
+        return "redirect:/businessapp/dashboard/";
+    }
+
+    @PostMapping("/{serviceId}/tags")
+    public String addTagsToService(@ModelAttribute @Valid Tag tag, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return "app/business/businessTagsAdd";
+        }
+        tagRepository.save(tag);
+        return "redirect:/businessapp/service/" + tag.getService().getId() + "/tags";
+    }
+
+
+    @RequestMapping("/{serviceId}/tag/delete/{tagId}")
+    public String deleteServiceTag(@PathVariable long serviceId, @PathVariable long tagId, HttpSession sess) {
+        Optional<Service> service = serviceRepository.findById(serviceId);
+        if(service.isPresent()) {
+            if (!((Business) sess.getAttribute("loggedBusiness")).getId().equals(service.get().getBusiness().getId())) {
+                return "redirect:/businessapp/dashboard/";
+            }
+            Optional<Tag> tag = tagRepository.findById(tagId);
+            if(tag.isPresent()) {
+                tagRepository.delete(tag.get());
+                return "redirect:/businessapp/service/" + tag.get().getService().getId() + "/tags";
+            }
         }
         return "redirect:/businessapp/dashboard/";
     }

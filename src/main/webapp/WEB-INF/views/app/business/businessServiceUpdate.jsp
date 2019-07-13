@@ -67,28 +67,28 @@
 
         <div class="inline">
             Wojewódźtwo:
-            <form:select path="province" items="${provinces}" itemLabel="name" itemValue="id"/>
+            <form:select path="province.id" items="${provinces}" itemLabel="name" itemValue="id"/>
             <div class="error">
                 <form:errors path="province" cssClass="error" />
             </div>
         </div>
         <div class="inline">
             Powiat:
-            <form:select path="district" items="${districts}" itemLabel="name" itemValue="id"/>
+            <form:select path="district.id" items="${districts}" itemLabel="name" itemValue="id"/>
             <div class="error">
                 <form:errors path="district" cssClass="error" />
             </div>
         </div>
         <div class="inline">
             Gmina:
-            <form:select path="commune" items="${communes}" itemLabel="name" itemValue="id"/>
+            <form:select path="commune.id" items="${communes}" itemLabel="name" itemValue="id"/>
             <div class="error">
                 <form:errors path="commune" cssClass="error" />
             </div>
         </div>
         <div class="inline">
             Miejscowość:
-            <form:select path="locality" items="${localities}" itemLabel="name" itemValue="id"/>
+            <form:select path="locality.id" items="${localities}" itemLabel="name" itemValue="id"/>
             <div class="error">
                 <form:errors path="locality" cssClass="error" />
             </div>
@@ -133,6 +133,7 @@
 
             </div>
         </div>
+
 
         <table>
             <tr>

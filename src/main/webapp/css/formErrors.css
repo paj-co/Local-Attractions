@@ -370,6 +370,45 @@ div#serviceCategories .checkbox{
     height: 250px;
     vertical-align: top;
 }
+#tagAdd .inline{
+    display: inline;
+}
+.tag {
+    width: 50%;
+    min-width: 400px;
+    max-width: 500px;
+}
+#tagAdd .topic{
+    display: block;
+    margin-bottom: 3px;
+}
+#tagAdd .content{
+    border-radius: 5% 20% 5%;
+    background-color: #97b0cb;
+    padding: 2px;
+    width: max-content;
+}
+#tagAdd a button.deleteButton{
+    padding: 0 2px;
+    margin: 2px;
+    font-size: 0.7em;
+    border-radius: 4px;
+    background-color: #326a67;
+    color: white;
+}
+#tagAdd .inline{
+    width: max-content;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 0.9em;
+}
+#tagAdd .buttonRight{
+    height: 30px;
+}
+.tagItem{
+    margin-bottom: 2px;
+}
+
 
 
 
