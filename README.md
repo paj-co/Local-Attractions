@@ -4,6 +4,6 @@ Easy way for finding attraction wherever you are in Poland.
 
 ##### Used technology: Spring Framework, Spring MVC, Spring Form, Spring Data, Hibernate, JSP + JSTL.
 
-![](images/local_attractions.png)
+![screenshot](images/local_attractions.png)
 
 
